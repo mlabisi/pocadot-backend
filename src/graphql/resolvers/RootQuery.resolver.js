@@ -2,11 +2,6 @@
 
 module.exports = {
     Query: {
-        user: () => {
 
-        },
-        users: () => {
-            
-        }
     }
 }

@@ -8,20 +8,23 @@ type User {
     # Unique username
     username: String!
 
+    # Country
+    country: String!
+
     # All listings created by user
-    listings: [Listing!]!
+    listings: [Listing!]
 
     # All collections created by user
-    collections: [Collection!]!
+    collections: [Collection!]
 
     # All groups marked as fave by user
-    faveGroups: [Group!]!
+    faveGroups: [Group!]
 
     # All listings marked as fave by user
-    faveListings: [Listing!]!
+    faveListings: [Listing!]
 
     # All users marked as fave by user
-    faveUsers: [User!]!
+    faveUsers: [User!]
 }
 
 """
@@ -66,7 +69,7 @@ type Idol {
     stageName: String!
 
     # Group(s) to which this idol belongs
-    groups: [Group]!
+    groups: [Group!]!
 }
 
 """
@@ -93,19 +96,22 @@ interface Listing {
     # Owner of the listing
     owner: User!
 
-    # All listings created by user
+    # The condition of the photocard
+    condition: Condition!
+
+    # The idol whose photocard this is
     idol: Idol!
 
-    # All collections created by user
+    # The release this photocard's listing is from
     release: Release!
 
-    # All groups marked as fave by user
+    # Listing description
     description: String!
 
-    # All listings marked as fave by user
+    # Country where this photocard will be shipped from
     countryOfOrigin: String!
 
-    # All users marked as fave by user
+    # Whether or not this photocard can be shipped internationally
     internationalShipping: Boolean!
 }
 
@@ -113,6 +119,7 @@ type SellListing implements Listing {
     # Interface fields
     id: ID!
     owner: User!
+    condition: Condition!
     idol: Idol!
     release: Release!
     description: String!
@@ -127,6 +134,7 @@ type TradeListing implements Listing {
     # Interface fields
     id: ID!
     owner: User!
+    condition: Condition!
     idol: Idol!
     release: Release!
     description: String!

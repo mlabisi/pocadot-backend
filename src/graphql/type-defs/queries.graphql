@@ -2,9 +2,15 @@
 Available queries
 """
 type Query {
-    # Querying for a single user
-    user: User!
+    users(input: UserInput, size: Int, pageNo: Int): [User!]!
 
-    # Querying for multiple users
-    users: [User!]!
+    idols(input: IdolInput, size: Int, pageNo: Int): Idol!
+
+    listings(input: ListingInput, size: Int, pageNo: Int): [Listing!]!
+
+    collections(input: CollectionInput, size: Int, pageNo: Int): [Collection!]!
+
+    groups(input: GroupInput, size: Int, pageNo: Int): [Group!]!
+
+    releases(input: ReleaseInput, size: Int, pageNo: Int): [Release!]!
 }
