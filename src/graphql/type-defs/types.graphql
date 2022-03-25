@@ -1,0 +1,25 @@
+"""
+Represents a user in the system
+"""
+type User {
+    # Unique user ID
+    id: ID!
+
+    # Unique username
+    username: String!
+
+    # All listings created by user
+    listings: [Listing!]!
+
+    # All collections created by user
+    collections: [Collection!]!
+
+    # All groups marked as fave by user
+    faveGroups: [Group!]!
+
+    # All listings marked as fave by user
+    faveListings: [Listing!]!
+
+    # All users marked as fave by user
+    faveUsers: [User!]!
+}

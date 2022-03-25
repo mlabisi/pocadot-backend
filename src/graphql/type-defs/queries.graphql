@@ -1,0 +1,10 @@
+"""
+Available queries
+"""
+type Query {
+    # Querying for a single user
+    user: User!
+
+    # Querying for multiple users
+    users: [User!]!
+}

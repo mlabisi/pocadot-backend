@@ -1,0 +1,25 @@
+"""
+When adding a user, no other fields can be added
+"""
+input AddUserInput {
+    name: String!
+    username: String!
+}
+
+"""
+When updating a user, other existing fields can be added
+"""
+input UpdateUserInput {
+    name: String
+    username: String
+    listings: [UniqueListingInput!]
+    collections: [UniqueCollectionInput!]
+    faveGroups: [UniqueGroupInput!]
+    faveListings: [UniqueListingInput!]
+    faveUsers: [UniqueUserInput!]
+}
+
+input UniqueUserInput {
+    id: ID
+    username: String
+}

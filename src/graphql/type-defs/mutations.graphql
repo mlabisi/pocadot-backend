@@ -1,0 +1,13 @@
+"""
+Available mutations
+"""
+type Mutation {
+    # Adding a single user
+    addUser(input: AddUserInput!): User!
+
+    # Updating a single user
+    updateUser(input: UpdateUserInput!, where: UniqueUserInput!): User!
+
+    # Removing a single user
+    removeUser(input: UniqueUserInput!): User!
+}
