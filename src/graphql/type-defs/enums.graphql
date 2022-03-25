@@ -1,0 +1,35 @@
+"""
+Used to classify listings
+"""
+enum ListingType {
+    # Want to Sell
+    wts
+
+    # Want to trade
+    wtt
+}
+
+type ListingTypesWrapper {
+    listingTypes: ListingType
+}
+
+"""
+Used to classify photocard conditions
+"""
+enum Condition {
+    # Substantial defects (rough edges, faded color, tears, scratches)
+    Okay
+
+    # Slight defects (rough edges, faded color, tears, scratches)
+    Good
+
+    # Opened, in top quality
+    Great
+
+    # Not opened, in original packaging
+    New
+}
+
+type ConditionWrapper {
+    conditions: Condition
+}

@@ -23,3 +23,122 @@ type User {
     # All users marked as fave by user
     faveUsers: [User!]!
 }
+
+"""
+Represents a collection owned by a user
+"""
+type Collection {
+    # Unique collection ID
+    id: ID!
+
+    # Title of the collection
+    title: String!
+
+    # Description for the collection
+    description: String!
+
+    # Owner of the collection
+    owner: User!
+}
+
+"""
+Represents a group in the system
+"""
+type Group {
+    # Unique group ID
+    id: ID!
+
+    # Name of the group
+    name: String!
+
+    # Collection of members of the group
+    members: [Idol!]!
+}
+
+"""
+Represents an idol in the system
+"""
+type Idol {
+    # Unique idol ID
+    id: ID!
+
+    # Stage name of the idol
+    stageName: String!
+
+    # Group(s) to which this idol belongs
+    groups: [Group]!
+}
+
+"""
+Represents a specific release to which a photocard belongs
+"""
+type Release {
+    # Unique release ID
+    id: ID!
+
+    # Title of the release
+    title: String!
+
+    # The group that had this release
+    group: Group!
+}
+
+"""
+Represents a listing in the system
+"""
+interface Listing {
+    # Unique listing ID
+    id: ID!
+
+    # Owner of the listing
+    owner: User!
+
+    # All listings created by user
+    idol: Idol!
+
+    # All collections created by user
+    release: Release!
+
+    # All groups marked as fave by user
+    description: String!
+
+    # All listings marked as fave by user
+    countryOfOrigin: String!
+
+    # All users marked as fave by user
+    internationalShipping: Boolean!
+}
+
+type SellListing implements Listing {
+    # Interface fields
+    id: ID!
+    owner: User!
+    idol: Idol!
+    release: Release!
+    description: String!
+    countryOfOrigin: String!
+    internationalShipping: Boolean!
+
+    # Minimum price for listing
+    minPrice: Float!
+}
+
+type TradeListing implements Listing {
+    # Interface fields
+    id: ID!
+    owner: User!
+    idol: Idol!
+    release: Release!
+    description: String!
+    countryOfOrigin: String!
+    internationalShipping: Boolean!
+
+    # Description of the desired photocard
+    tradeTargets: [TradeTargets]
+
+    # Minimum price for listing
+    minPrice: Float
+}
+
+union TradeTargets = Idol | Group | ConditionWrapper
+
