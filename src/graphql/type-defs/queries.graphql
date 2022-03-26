@@ -2,15 +2,15 @@
 Available queries
 """
 type Query {
-    users(input: UserInput, size: Int, pageNo: Int): [User!]!
+  users(filter: UserFilters, size: Int, pageNo: Int): [User!]!
 
-    idols(input: IdolInput, size: Int, pageNo: Int): Idol!
+  idols(input: IdolInput, size: Int, pageNo: Int): Idol!
 
-    listings(input: ListingInput, size: Int, pageNo: Int): [Listing!]!
+  listings(input: ListingInput, size: Int, pageNo: Int): [Listing!]!
 
-    collections(input: CollectionInput, size: Int, pageNo: Int): [Collection!]!
+  collections(input: CollectionInput, size: Int, pageNo: Int): [Collection!]!
 
-    groups(input: GroupInput, size: Int, pageNo: Int): [Group!]!
+  groups(input: GroupInput, size: Int, pageNo: Int): [Group!]!
 
-    releases(input: ReleaseInput, size: Int, pageNo: Int): [Release!]!
+  releases(input: ReleaseInput, size: Int, pageNo: Int): [Release!]!
 }

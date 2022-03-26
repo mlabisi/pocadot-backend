@@ -2,34 +2,34 @@
 Used to classify listings
 """
 enum ListingType {
-    # Want to Sell
-    WTS
+  # Want to Sell
+  WTS
 
-    # Want to trade
-    WTT
+  # Want to trade
+  WTT
 }
 
 type ListingTypesWrapper {
-    listingTypes: ListingType
+  listingTypes: ListingType
 }
 
 """
 Used to classify photocard conditions
 """
 enum Condition {
-    # Substantial defects (rough edges, faded color, tears, scratches)
-    OKAY
+  # Substantial defects (rough edges, faded color, tears, scratches)
+  OKAY
 
-    # Slight defects (rough edges, faded color, tears, scratches)
-    GOOD
+  # Slight defects (rough edges, faded color, tears, scratches)
+  GOOD
 
-    # Opened, in top quality
-    GREAT
+  # Opened, in top quality
+  GREAT
 
-    # Not opened, in original packaging
-    NEW
+  # Not opened, in original packaging
+  NEW
 }
 
 type ConditionWrapper {
-    conditions: Condition
+  conditions: Condition
 }

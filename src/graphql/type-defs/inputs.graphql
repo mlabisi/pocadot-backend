@@ -2,111 +2,111 @@
 When adding a user, no optional fields can be added
 """
 input AddUserInput {
-    username: String!
-    country: String!
+  username: String!
+  country: String!
 }
 
 """
 When updating a user, other existing fields can be added
 """
 input UpdateUserInput {
-    username: String
-    country: String
-    listings: [UniqueListingInput!]
-    collections: [UniqueCollectionInput!]
-    faveGroups: [UniqueGroupInput!]
-    faveListings: [UniqueListingInput!]
-    faveUsers: [UniqueUserInput!]
+  username: String
+  country: String
+  listings: [UniqueListingInput!]
+  collections: [UniqueCollectionInput!]
+  faveGroups: [UniqueGroupInput!]
+  faveListings: [UniqueListingInput!]
+  faveUsers: [UniqueUserInput!]
 }
 
 """
 When adding a listing, all required fields must be specified
 """
 input AddListingInput {
-    owner: UniqueUserInput!
-    condition: Condition!
-    idol: UniqueIdolInput!
-    release: UniqueReleaseInput!
-    description: String!
-    countryOfOrigin: String!
-    internationalShipping: Boolean!
+  owner: UniqueUserInput!
+  condition: Condition!
+  idol: UniqueIdolInput!
+  release: UniqueReleaseInput!
+  description: String!
+  countryOfOrigin: String!
+  internationalShipping: Boolean!
 }
 
 """
 When updating a listing, only non-final fields can be updated
 """
 input UpdateListingInput {
-    condition: Condition!
-    idol: UniqueIdolInput
-    release: UniqueReleaseInput
-    description: String
-    countryOfOrigin: String
-    internationalShipping: Boolean
+  condition: Condition!
+  idol: UniqueIdolInput
+  release: UniqueReleaseInput
+  description: String
+  countryOfOrigin: String
+  internationalShipping: Boolean
 }
 
 """
 When adding a collection, all required fields must be specified
 """
 input AddCollectionInput {
-    owner: UniqueUserInput!
-    title: String!
-    description: String!
+  owner: UniqueUserInput!
+  title: String!
+  description: String!
 }
 
 """
 When updating a collection, only non-final fields can be updated
 """
 input UpdateCollectionInput {
-    title: String
-    description: String
+  title: String
+  description: String
 }
 
 """
 When adding a group, idols can be created and/or connnected
 """
 input AddGroupInput {
-    name: String!
-    members: [IdolInput!]
+  name: String!
+  members: [IdolInput!]
 }
 
 """
 When updating a group, all fields can be updated
 """
 input UpdateGroupInput {
-    name: String
-    members: [IdolInput!]
+  name: String
+  members: [IdolInput!]
 }
 
 """
 When adding an idol, the group must exist first
 """
 input AddIdolInput {
-    stageName: String!,
-    groups: [UniqueGroupInput!]!
+  stageName: String!
+  groups: [UniqueGroupInput!]!
 }
 
 """
 When updating an idol, all fields can be updated
 """
 input UpdateIdolInput {
-    stageName: String
-    groups: [UniqueGroupInput!]
+  stageName: String
+  groups: [UniqueGroupInput!]
 }
 
 """
 When adding a release, the group must exist
 """
 input AddReleaseInput {
-    title: String!
-    group: UniqueGroupInput!
+  title: String!
+  group: UniqueGroupInput!
 }
 
 """
 When updating a release, all fields can be updated
 """
 input UpdateReleaseInput {
-    title: String
-    group: UniqueGroupInput
+  title: String
+  group: UniqueGroupInput
 }
 
 # Filters
@@ -114,122 +114,122 @@ input UpdateReleaseInput {
 Available filters for the User type
 """
 input UserFilters {
-    ids: [ID!]
-    usernameContains: String
-    listingIdolsContain: String
-    country: String
+  ids: [ID!]
+  usernameContains: String
+  listingIdolsContain: String
+  country: String
 }
 
 """
 Available filters for the Idol type
 """
 input IdolFilters {
-    ids: [ID!]
-    stageNameContains: String
-    groupNamesContain: String
+  ids: [ID!]
+  stageNameContains: String
+  groupNamesContain: String
 }
 
 """
 Available filters for the Listing type
 """
 input ListingFilters {
-    ids: [ID!]
-    ownerIds: [ID!]
-    conditions: [Condition!]
-    idolNameContains: String
-    groupNamesContain: String
-    releaseNameContains: String
-    descriptionContains: String
-    countryOfOriginContains: String
-    internationShipping: String
-    minPrice: Float
-    tradeTargetsContain: String
+  ids: [ID!]
+  ownerIds: [ID!]
+  conditions: [Condition!]
+  idolNameContains: String
+  groupNamesContain: String
+  releaseNameContains: String
+  descriptionContains: String
+  countryOfOriginContains: String
+  internationShipping: String
+  minPrice: Float
+  tradeTargetsContain: String
 }
 
 """
 Available filters for the Group type
 """
 input GroupFilters {
-    ids: [ID!]
-    groupNameContains: String
-    groupMembersContain: String
+  ids: [ID!]
+  groupNameContains: String
+  groupMembersContain: String
 }
 
 """
 Available filters for the Collection type
 """
 input CollectionFilters {
-    ids: [ID!]
-    ownerNameContains: String
+  ids: [ID!]
+  ownerNameContains: String
 }
 
 """
 Available filters for the Release type
 """
 input ReleaseFilters {
-    ids: [ID!]
-    titleContains: String
-    groupNameContains: String
+  ids: [ID!]
+  titleContains: String
+  groupNameContains: String
 }
 
 # Query Inputs
 input UserInput {
-    create: [AddUserInput!]
-    connect: [UniqueUserInput!]
-    filter: UserFilters
+  create: [AddUserInput!]
+  connect: [UniqueUserInput!]
+  filter: UserFilters
 }
 
 input IdolInput {
-    create: [AddIdolInput!]
-    connect: [UniqueIdolInput!]
-    filter: IdolFilters
+  create: [AddIdolInput!]
+  connect: [UniqueIdolInput!]
+  filter: IdolFilters
 }
 
 input ListingInput {
-    create: [AddListingInput!]
-    connect: [UniqueListingInput!]
-    filter: ListingFilters
+  create: [AddListingInput!]
+  connect: [UniqueListingInput!]
+  filter: ListingFilters
 }
 
 input CollectionInput {
-    create: [AddCollectionInput!]
-    connect: [UniqueCollectionInput!]
-    filter: CollectionFilters
+  create: [AddCollectionInput!]
+  connect: [UniqueCollectionInput!]
+  filter: CollectionFilters
 }
 
 input GroupInput {
-    create: [AddGroupInput!]
-    connect: [UniqueGroupInput!]
-    filter: GroupFilters
+  create: [AddGroupInput!]
+  connect: [UniqueGroupInput!]
+  filter: GroupFilters
 }
 
 input ReleaseInput {
-    create: [AddReleaseInput!]
-    connect: [UniqueReleaseInput!]
-    filter: ReleaseFilters
+  create: [AddReleaseInput!]
+  connect: [UniqueReleaseInput!]
+  filter: ReleaseFilters
 }
 
 # Unique Inputs
 input UniqueIdolInput {
-    id: ID!
+  id: ID!
 }
 
 input UniqueUserInput {
-    id: ID!
+  id: ID!
 }
 
 input UniqueListingInput {
-    id: ID!
+  id: ID!
 }
 
 input UniqueCollectionInput {
-    id: ID!
+  id: ID!
 }
 
 input UniqueGroupInput {
-    id: ID!
+  id: ID!
 }
 
 input UniqueReleaseInput {
-    id: ID!
+  id: ID!
 }

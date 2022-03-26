@@ -1,17 +1,46 @@
-'use strict';
+"use strict";
 
 module.exports = {
-    Query: {
-        users: (parent, args, context) => {},
+  Query: {
+    users: (parent, args, context) => {
+      const { filter, size, pageNo } = args;
+      const { dataSources } = context;
+      const { database } = dataSources;
 
-        idols: (parent, args, context) => {},
+      if (!filter) {
+        return database.getUsers();
+      }
 
-        listings: (parent, args, context) => {},
+      const { ids, usernameContains, listingIdolsContain, country } = filter;
+      const users = [];
 
-        collections: (parent, args, context) => {},
+      if (ids) {
+        users.push(database.getUsersById(ids));
+      }
 
-        groups: (parent, args, context) => {},
+      if (usernameContains) {
+        users.push(database.getUsersByUsername(usernameContains));
+      }
 
-        releases: (parent, args, context) => {},
-    }
-}
+      if (listingIdolsContain) {
+        users.push(database.getUsersByIdolsListed(listingIdolsContain));
+      }
+
+      if (country) {
+        users.push(database.getUsersByCountry(country));
+      }
+
+      return users;
+    },
+
+    idols: (parent, args, context) => {},
+
+    listings: (parent, args, context) => {},
+
+    collections: (parent, args, context) => {},
+
+    groups: (parent, args, context) => {},
+
+    releases: (parent, args, context) => {},
+  },
+};
