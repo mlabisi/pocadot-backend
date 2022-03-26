@@ -2,16 +2,16 @@
 
 module.exports = {
     Query: {
-        users: () => {},
+        users: (parent, args, context) => {},
 
-        idols: () => {},
+        idols: (parent, args, context) => {},
 
-        listings: () => {},
+        listings: (parent, args, context) => {},
 
-        collections: () => {},
+        collections: (parent, args, context) => {},
 
-        groups: () => {},
+        groups: (parent, args, context) => {},
 
-        releases: () => {},
+        releases: (parent, args, context) => {},
     }
 }
