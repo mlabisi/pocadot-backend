@@ -103,7 +103,7 @@ interface Listing {
   idol: Idol!
 
   # The release this photocard's listing is from
-  release: Release!
+  release: String!
 
   # Listing description
   description: String!
@@ -121,7 +121,7 @@ type SellListing implements Listing {
   owner: User!
   condition: Condition!
   idol: Idol!
-  release: Release!
+  release: String!
   description: String!
   countryOfOrigin: String!
   internationalShipping: Boolean!
@@ -136,7 +136,7 @@ type TradeListing implements Listing {
   owner: User!
   condition: Condition!
   idol: Idol!
-  release: Release!
+  release: String!
   description: String!
   countryOfOrigin: String!
   internationalShipping: Boolean!

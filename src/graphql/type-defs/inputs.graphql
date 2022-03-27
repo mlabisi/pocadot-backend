@@ -1,3 +1,4 @@
+# Additions and Updates
 """
 When adding a user, no optional fields can be added
 """
@@ -26,7 +27,7 @@ input AddListingInput {
   owner: UniqueUserInput!
   condition: Condition!
   idol: UniqueIdolInput!
-  release: UniqueReleaseInput!
+  release: String!
   description: String!
   countryOfOrigin: String!
   internationalShipping: Boolean!
@@ -38,7 +39,7 @@ When updating a listing, only non-final fields can be updated
 input UpdateListingInput {
   condition: Condition!
   idol: UniqueIdolInput
-  release: UniqueReleaseInput
+  release: String
   description: String
   countryOfOrigin: String
   internationalShipping: Boolean
@@ -93,31 +94,13 @@ input UpdateIdolInput {
   groups: [UniqueGroupInput!]
 }
 
-"""
-When adding a release, the group must exist
-"""
-input AddReleaseInput {
-  title: String!
-  group: UniqueGroupInput!
-}
-
-"""
-When updating a release, all fields can be updated
-"""
-input UpdateReleaseInput {
-  title: String
-  group: UniqueGroupInput
-}
-
 # Filters
 """
 Available filters for the User type
 """
 input UserFilters {
   ids: [ID!]
-  usernameContains: String
   listingIdolsContain: String
-  country: String
 }
 
 """
@@ -125,8 +108,6 @@ Available filters for the Idol type
 """
 input IdolFilters {
   ids: [ID!]
-  stageNameContains: String
-  groupNamesContain: String
 }
 
 """
@@ -134,16 +115,6 @@ Available filters for the Listing type
 """
 input ListingFilters {
   ids: [ID!]
-  ownerIds: [ID!]
-  conditions: [Condition!]
-  idolNameContains: String
-  groupNamesContain: String
-  releaseNameContains: String
-  descriptionContains: String
-  countryOfOriginContains: String
-  internationShipping: String
-  minPrice: Float
-  tradeTargetsContain: String
 }
 
 """
@@ -151,8 +122,6 @@ Available filters for the Group type
 """
 input GroupFilters {
   ids: [ID!]
-  groupNameContains: String
-  groupMembersContain: String
 }
 
 """
@@ -160,16 +129,6 @@ Available filters for the Collection type
 """
 input CollectionFilters {
   ids: [ID!]
-  ownerNameContains: String
-}
-
-"""
-Available filters for the Release type
-"""
-input ReleaseFilters {
-  ids: [ID!]
-  titleContains: String
-  groupNameContains: String
 }
 
 # Query Inputs
@@ -203,12 +162,6 @@ input GroupInput {
   filter: GroupFilters
 }
 
-input ReleaseInput {
-  create: [AddReleaseInput!]
-  connect: [UniqueReleaseInput!]
-  filter: ReleaseFilters
-}
-
 # Unique Inputs
 input UniqueIdolInput {
   id: ID!
@@ -227,9 +180,5 @@ input UniqueCollectionInput {
 }
 
 input UniqueGroupInput {
-  id: ID!
-}
-
-input UniqueReleaseInput {
   id: ID!
 }

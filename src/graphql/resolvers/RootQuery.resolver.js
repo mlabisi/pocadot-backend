@@ -1,46 +1,19 @@
 "use strict";
 
+const { resolveUsers, resolveIdols, resolveGroups, resolveListings, resolveCollections } = require("./index");
+
 module.exports = {
   Query: {
-    users: (parent, args, context) => {
-      const { filter, size, pageNo } = args;
-      const { dataSources } = context;
-      const { database } = dataSources;
+    users: (parent, args, context) => resolveUsers(args, context),
 
-      if (!filter) {
-        return database.getUsers();
-      }
+    idols: (parent, args, context) => resolveIdols(args, context),
 
-      const { ids, usernameContains, listingIdolsContain, country } = filter;
-      const users = [];
+    groups: (parent, args, context) => resolveGroups(args, context),
 
-      if (ids) {
-        users.push(database.getUsersById(ids));
-      }
+    listings: (parent, args, context) => resolveListings(args, context),
 
-      if (usernameContains) {
-        users.push(database.getUsersByUsername(usernameContains));
-      }
+    collections: (parent, args, context) => resolveCollections(args, context),
 
-      if (listingIdolsContain) {
-        users.push(database.getUsersByIdolsListed(listingIdolsContain));
-      }
-
-      if (country) {
-        users.push(database.getUsersByCountry(country));
-      }
-
-      return users;
-    },
-
-    idols: (parent, args, context) => {},
-
-    listings: (parent, args, context) => {},
-
-    collections: (parent, args, context) => {},
-
-    groups: (parent, args, context) => {},
-
-    releases: (parent, args, context) => {},
+    faveGroups: (parent, args, context) => res
   },
 };

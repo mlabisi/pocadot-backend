@@ -37,13 +37,4 @@ type Mutation {
   updateGroup(input: UpdateGroupInput!, where: UniqueGroupInput!): Group!
 
   removeGroup(input: UniqueGroupInput!): Group!
-
-  addRelease(input: AddReleaseInput!): Release!
-
-  updateRelease(
-    input: UpdateReleaseInput!
-    where: UniqueReleaseInput!
-  ): Release!
-
-  removeRelease(input: UniqueReleaseInput!): Release!
 }

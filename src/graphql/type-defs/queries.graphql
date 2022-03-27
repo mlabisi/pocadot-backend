@@ -4,13 +4,21 @@ Available queries
 type Query {
   users(filter: UserFilters, size: Int, pageNo: Int): [User!]!
 
-  idols(input: IdolInput, size: Int, pageNo: Int): Idol!
+  idols(filter: IdolFilters, size: Int, pageNo: Int): [Idol!]!
 
-  listings(input: ListingInput, size: Int, pageNo: Int): [Listing!]!
+  groups(filter: GroupFilters, size: Int, pageNo: Int): [Group!]!
 
-  collections(input: CollectionInput, size: Int, pageNo: Int): [Collection!]!
+  listings(filter: ListingFilters, size: Int, pageNo: Int): [Listing!]!
 
-  groups(input: GroupInput, size: Int, pageNo: Int): [Group!]!
+  collections(filter: CollectionFilters, size: Int, pageNo: Int): [Collection!]!
 
-  releases(input: ReleaseInput, size: Int, pageNo: Int): [Release!]!
+  faveGroups: [Group!]!
+
+  faveListings: [Listing!]!
+
+  faveUsers: [User!]!
+
+  userCollections: [Collection!]!
+
+  userListings: [Listing!]!
 }
