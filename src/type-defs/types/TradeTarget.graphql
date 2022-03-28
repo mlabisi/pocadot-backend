@@ -1,0 +1,4 @@
+"""
+Represents trade targets
+"""
+union TradeTarget = Idol | Group | CardConditionWrapper

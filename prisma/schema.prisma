@@ -1,0 +1,79 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model collections {
+  id      Int    @id(map: "collections_pk") @unique(map: "collections_id_uindex") @default(autoincrement())
+  title   String @db.VarChar
+  ownerId Int?
+  users   users? @relation(fields: [ownerId], references: [id], onDelete: Cascade, map: "ownerId")
+}
+
+model faveGroups {
+  id      Int     @id(map: "favegroups_pk") @unique(map: "favegroups_faveid_uindex") @default(autoincrement())
+  userId  Int
+  groupId Int?
+  groups  groups? @relation(fields: [groupId], references: [id], onDelete: Cascade, map: "groupId")
+  users   users   @relation(fields: [userId], references: [id], onDelete: Cascade, map: "userId")
+}
+
+model faveListings {
+  id        Int       @id(map: "favelistings_pk") @unique(map: "favelistings_id_uindex") @default(autoincrement())
+  userId    Int?
+  listingId Int?
+  listings  listings? @relation(fields: [listingId], references: [id], onDelete: Cascade, map: "listingId")
+  users     users?    @relation(fields: [userId], references: [id], onDelete: Cascade, map: "userId")
+}
+
+model faveUsers {
+  id                              Int    @id(map: "faveusers_pk") @unique(map: "faveusers_id_uindex") @default(autoincrement())
+  sourceId                        Int?
+  targetId                        Int?
+  users_faveUsers_sourceIdTousers users? @relation("faveUsers_sourceIdTousers", fields: [sourceId], references: [id], onDelete: Cascade, map: "sourceId")
+  users_faveUsers_targetIdTousers users? @relation("faveUsers_targetIdTousers", fields: [targetId], references: [id], onDelete: Cascade, map: "targetId")
+}
+
+model groups {
+  id         Int          @id(map: "groups_pk") @unique(map: "groups_id_uindex") @default(autoincrement())
+  name       String       @db.VarChar
+  faveGroups faveGroups[]
+  idols      idols[]
+}
+
+model idols {
+  id        Int     @id(map: "idols_pk") @unique(map: "idols_id_uindex") @default(autoincrement())
+  stageName String  @db.VarChar
+  groupId   Int?
+  groups    groups? @relation(fields: [groupId], references: [id], onDelete: Cascade, map: "groupId")
+}
+
+model listings {
+  id            Int            @id(map: "listings_pk") @unique(map: "listings_id_uindex") @default(autoincrement())
+  idolId        Int?
+  release       String?        @db.VarChar
+  description   String         @db.VarChar
+  conditionId   Int?
+  startingPrice Float?
+  typeId        Int?
+  from          String         @db.VarChar
+  international Boolean        @default(false)
+  ownerId       Int
+  users         users          @relation(fields: [ownerId], references: [id], onDelete: Cascade, map: "ownerId")
+  faveListings  faveListings[]
+}
+
+model users {
+  id                                  Int            @id(map: "users_pk") @unique(map: "users_id_uindex") @default(autoincrement())
+  username                            String         @unique(map: "users_username_uindex") @db.VarChar
+  collections                         collections[]
+  faveGroups                          faveGroups[]
+  faveListings                        faveListings[]
+  faveUsers_faveUsers_sourceIdTousers faveUsers[]    @relation("faveUsers_sourceIdTousers")
+  faveUsers_faveUsers_targetIdTousers faveUsers[]    @relation("faveUsers_targetIdTousers")
+  listings                            listings[]
+}

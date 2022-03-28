@@ -1,0 +1,14 @@
+"""
+Used to classify listings
+"""
+enum ListingType {
+  # Want to Sell
+  WTS
+
+  # Want to trade
+  WTT
+}
+
+type ListingTypesWrapper {
+  listingTypes: ListingType
+}

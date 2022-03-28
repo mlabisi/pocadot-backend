@@ -1,0 +1,26 @@
+"""
+When adding a group, idols can be created and/or connnected
+"""
+input AddGroupInput {
+  name: String!
+  members: [UniqueIdolInput!]
+}
+
+"""
+When updating a group, all fields can be updated
+"""
+input UpdateGroupInput {
+  name: String
+  members: [UniqueIdolInput!]
+}
+
+"""
+Available filters for the Group type
+"""
+input GroupFilters {
+  ids: [ID!]
+}
+
+input UniqueGroupInput {
+  id: ID!
+}
