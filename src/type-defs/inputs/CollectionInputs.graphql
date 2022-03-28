@@ -1,0 +1,27 @@
+"""
+When adding a collection, all required fields must be specified
+"""
+input AddCollectionInput {
+  owner: UniqueUserInput!
+  title: String!
+  description: String!
+}
+
+"""
+When updating a collection, only non-final fields can be updated
+"""
+input UpdateCollectionInput {
+  title: String
+  description: String
+}
+
+"""
+Available filters for the Collection type
+"""
+input CollectionFilters {
+  ids: [ID!]
+}
+
+input UniqueCollectionInput {
+  id: ID!
+}

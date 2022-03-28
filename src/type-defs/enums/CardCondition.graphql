@@ -1,22 +1,7 @@
 """
-Used to classify listings
-"""
-enum ListingType {
-  # Want to Sell
-  WTS
-
-  # Want to trade
-  WTT
-}
-
-type ListingTypesWrapper {
-  listingTypes: ListingType
-}
-
-"""
 Used to classify photocard conditions
 """
-enum Condition {
+enum CardCondition {
   # Substantial defects (rough edges, faded color, tears, scratches)
   OKAY
 
@@ -30,6 +15,6 @@ enum Condition {
   NEW
 }
 
-type ConditionWrapper {
-  conditions: Condition
+type CardConditionWrapper {
+  conditions: CardCondition
 }

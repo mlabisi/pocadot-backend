@@ -1,0 +1,35 @@
+"""
+When adding a listing, all required fields must be specified
+"""
+input AddListingInput {
+  owner: UniqueUserInput!
+  condition: CardCondition!
+  idol: UniqueIdolInput!
+  release: String!
+  description: String!
+  countryOfOrigin: String!
+  internationalShipping: Boolean!
+}
+
+"""
+When updating a listing, only non-final fields can be updated
+"""
+input UpdateListingInput {
+  condition: CardCondition!
+  idol: UniqueIdolInput
+  release: String
+  description: String
+  countryOfOrigin: String
+  internationalShipping: Boolean
+}
+
+"""
+Available filters for the Listing type
+"""
+input ListingFilters {
+  ids: [ID!]
+}
+
+input UniqueListingInput {
+  id: ID!
+}

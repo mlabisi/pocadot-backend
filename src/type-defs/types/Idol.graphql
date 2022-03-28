@@ -1,0 +1,17 @@
+"""
+Represents an idol in the system
+"""
+type Idol {
+  # Unique idol ID
+  id: ID!
+
+  # Stage name of the idol
+  stageName: String!
+
+  # Group(s) to which this idol belongs
+  groups: [Group!]!
+}
+
+type Query {
+  idols(filter: IdolFilters, size: Int, pageNo: Int): [Idol!]!
+}

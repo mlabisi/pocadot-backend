@@ -1,0 +1,32 @@
+"""
+When adding a user, no optional fields can be added
+"""
+input AddUserInput {
+  username: String!
+  country: String!
+}
+
+"""
+When updating a user, other existing fields can be added
+"""
+input UpdateUserInput {
+  username: String
+  country: String
+  listings: [UniqueListingInput!]
+  collections: [UniqueCollectionInput!]
+  faveGroups: [UniqueGroupInput!]
+  faveListings: [UniqueListingInput!]
+  faveUsers: [UniqueUserInput!]
+}
+
+"""
+Available filters for the User type
+"""
+input UserFilters {
+  ids: [ID!]
+  listingIdolsContain: String
+}
+
+input UniqueUserInput {
+  id: ID!
+}
