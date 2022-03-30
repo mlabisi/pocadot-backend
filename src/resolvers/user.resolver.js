@@ -1,39 +1,22 @@
 module.exports = {
   User: {
     id: (user) => user.id,
-    username: (user) => user.username,
-    country: (user) => user.country,
-    listings: (user, args, context) =>
-      context.prisma.users
-        .findUnique({
-          where: {
-            id: user.id,
-          },
-          select: {
-            listings: true,
-          }
-        }),
-    collections: (user, args, context) =>
-      context.prisma.users
-        .findUnique({
-          where: {
-            id: user.id,
-          },
-          select: {
-            collections: true,
-          }
-        }),
+    username: (user) => user.id,
+    country: (user) => user.id,
+    description: (user) => user.id,
+    listings: (user) => user.id,
+    faveGroups: (user) => user.id,
+    faveListings: (user) => user.id,
+    faveUsers: (user) => user.id,
+    profilePicture: (user) => user.id,
+    collections: (user) => user.id,
   },
   Query: {
     users: (root, args, context) => context.prisma.users.findMany(),
-    faveUsers: (root, args, context) =>
-      context.prisma.faveUsers.findUnique({
-        where: { sourceId: context.userId },
-      }),
   },
   Mutation: {
-    createUser: (root, args, context) => {},
-    updateUser: (root, args, context) => {},
-    removeUser: (root, args, context) => {},
+    insert_user: (root, args, context) => {},
+    update_user: (root, args, context) => {},
+    delete_user: (root, args, context) => {},
   },
 };
