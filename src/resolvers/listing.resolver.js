@@ -21,8 +21,8 @@ module.exports = {
     listings: (root, args, context) => context.prisma.listings.findMany(),
   },
   Mutation: {
-    insert_listing: (root, args, context) => {},
-    update_listing: (root, args, context) => {},
-    delete_listing: (root, args, context) => {},
+    insert_listings: (root, args, context) => {},
+    update_listings: (root, args, context) => {},
+    delete_listings: (root, args, context) => {},
   },
 };

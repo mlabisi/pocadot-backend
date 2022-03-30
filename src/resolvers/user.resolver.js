@@ -15,8 +15,8 @@ module.exports = {
     users: (root, args, context) => context.prisma.users.findMany(),
   },
   Mutation: {
-    insert_user: (root, args, context) => {},
-    update_user: (root, args, context) => {},
-    delete_user: (root, args, context) => {},
+    insert_users: (root, args, context) => {},
+    update_users: (root, args, context) => {},
+    delete_users: (root, args, context) => {},
   },
 };
