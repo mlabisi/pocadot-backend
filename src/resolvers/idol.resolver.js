@@ -8,7 +8,7 @@ module.exports = {
     inCollections: (idol) => idol.id,
   },
   Query: {
-    idols: (root, args, context) => context.prisma.idols.findMany(),
+    idols: (root, args, context) => [],
   },
   Mutation: {
     insert_idols: (root, args, context) => [],

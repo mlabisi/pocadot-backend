@@ -12,7 +12,7 @@ module.exports = {
     collections: (user) => user.id,
   },
   Query: {
-    users: (root, args, context) => context.prisma.users.findMany(),
+    users: (root, args, context) => [],
   },
   Mutation: {
     insert_users: (root, args, context) => {},

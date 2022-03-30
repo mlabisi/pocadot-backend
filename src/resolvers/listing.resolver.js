@@ -18,7 +18,7 @@ module.exports = {
     type: (listing) => listing.id,
   },
   Query: {
-    listings: (root, args, context) => context.prisma.listings.findMany(),
+    listings: (root, args, context) => [],
   },
   Mutation: {
     insert_listings: (root, args, context) => {},

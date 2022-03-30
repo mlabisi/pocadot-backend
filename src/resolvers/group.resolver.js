@@ -8,7 +8,7 @@ module.exports = {
     wantedByListings: (group) => group.id,
   },
   Query: {
-    groups: (root, args, context) => context.prisma.groups.findMany(),
+    groups: (root, args, context) => [],
   },
   Mutation: {
     insert_groups: (root, args, context) => [],
