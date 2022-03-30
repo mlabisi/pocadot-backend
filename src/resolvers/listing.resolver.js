@@ -1,34 +1,35 @@
 module.exports = {
   Listing: {
-    __resolveType: (root) => {
-      return root.tradeTargets ? 'TradeListing' : 'SellListing';
+    __resolveType: (listing) => {
+      return listing.tradeTargets ? 'TradeListing' : 'SellListing';
     },
+    id: (listing) => listing.id,
+    owner: (listing) => listing.owner,
+    condition: (listing) => listing.condition,
+    idol: (listing, args, context) =>
+      context.prisma.listings
+        .findUnique({
+          where: {
+            id: listing.id,
+          },
+          select: {
+            listings: true,
+          }
+        }),
+    release: (listing) => listing.release,
+    description: (listing) => listing.description,
+    countryOfOrigin: (listing) => listing.country,
+    internationalShipping: (listing) => listing.international,
   },
   SellListing: {
-    id: () => {},
-    owner: () => {},
-    condition: () => {},
-    idol: () => {},
-    release: () => {},
-    description: () => {},
-    countryOfOrigin: () => {},
-    internationalShipping: () => {},
-    minPrice: () => {},
+    minPrice: (listing) => listing.startingPrice,
   },
   TradeListing: {
-    id: () => {},
-    owner: () => {},
-    condition: () => {},
-    idol: () => {},
-    release: () => {},
-    description: () => {},
-    countryOfOrigin: () => {},
-    internationalShipping: () => {},
-    tradeTargets: () => {},
-    minPrice: () => {},
+    tradeTargets: (listing) => listing.tradeTargets,
+    minPrice: (listing) => listing.startingPrice,
   },
   Query: {
-    listings: (root, args, context) => {},
+    listings: (root, args, context) => context.prisma.listings.findMany(),
     faveListings: (root, args, context) => {},
     userListings: (root, args, context) => {},
   },

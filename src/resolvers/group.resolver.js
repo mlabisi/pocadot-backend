@@ -1,11 +1,19 @@
 module.exports = {
   Group: {
-    id: () => {},
-    name: () => {},
-    members: () => {},
+    id: (group) => group.id,
+    name: (group) => group.name,
+    members: (group, args, context) =>
+      context.prisma.groups.findUnique({
+        where: {
+          id: group.id,
+        },
+      }).idols(),
   },
   Query: {
-    groups: (root, args, context) => {},
-    faveGroups: (root, args, context) => {},
+    groups: (root, args, context) => context.prisma.groups.findMany(),
+    faveGroups: (root, args, context) =>
+      context.prisma.faveGroups.findUnique({
+        where: { userId: context.userId },
+      }),
   },
 };

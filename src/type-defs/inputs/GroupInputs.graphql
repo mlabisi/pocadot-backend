@@ -10,8 +10,12 @@ input AddGroupInput {
 When updating a group, all fields can be updated
 """
 input UpdateGroupInput {
+  id: ID!
   name: String
   members: [UniqueIdolInput!]
+  favedBy: [UniqueUserInput!]
+  inListings: [UniqueListingInput!]
+  wantedByListings: [UniqueListingInput!]
 }
 
 """
@@ -19,6 +23,15 @@ Available filters for the Group type
 """
 input GroupFilters {
   ids: [ID!]
+  name: [String!]
+  favedBy: [String!]
+  members: [String!]
+  inListings: [String!]
+  wantedByListings: [String!]
+  _filter: JSON
+  _order_by: JSON
+  _page_size: Int
+  _page: Int
 }
 
 input UniqueGroupInput {

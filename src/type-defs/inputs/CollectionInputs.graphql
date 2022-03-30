@@ -2,17 +2,21 @@
 When adding a collection, all required fields must be specified
 """
 input AddCollectionInput {
-  owner: UniqueUserInput!
-  title: String!
+  title: String
   description: String!
+  user: UniqueUserInput!
+  taggedIdols: [UniqueIdolInput!]!
 }
 
 """
 When updating a collection, only non-final fields can be updated
 """
 input UpdateCollectionInput {
+  id: ID!
   title: String
   description: String
+  user: UniqueUserInput
+  taggedIdols: [UniqueIdolInput!]
 }
 
 """
@@ -20,6 +24,13 @@ Available filters for the Collection type
 """
 input CollectionFilters {
   ids: [ID!]
+  title: [String!]
+  user: [UniqueUserInput!]
+  taggedIdols: [UniqueIdolInput!]
+  _filter: JSON
+  _order_by: JSON
+  _page_size: Int
+  _page: Int
 }
 
 input UniqueCollectionInput {

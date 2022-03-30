@@ -2,29 +2,19 @@
 Represents a collection owned by a user
 """
 type Collection {
-  # Unique collection ID
   id: ID!
-
-  # Title of the collection
   title: String!
-
-  # Description for the collection
-  description: String!
-
-  # Owner of the collection
-  owner: User!
+  description: String
+  user: User!
+  taggedIdols: [Idol!]
 }
 
 type Query {
-  collections(filter: CollectionFilters, size: Int, pageNo: Int): [Collection!]!
-  userCollections: [Collection!]!
+  collections(filters: CollectionFilters): [Collection!]!
 }
 
 type Mutation {
-  createCollection(data: AddCollectionInput!): Collection!
-  updateCollection(
-    data: UpdateCollectionInput!
-    where: UniqueCollectionInput!
-  ): Collection!
-  removeCollection(where: UniqueCollectionInput!): Collection!
+  insert_collections(input: [AddCollectionInput!]!): [Collection!]!
+  update_collections(input: [UpdateCollectionInput!]!): [Collection!]!
+  delete_collections(input: [UniqueCollectionInput!]!): [Collection!]!
 }

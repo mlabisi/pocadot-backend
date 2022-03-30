@@ -2,17 +2,20 @@
 Represents a group in the system
 """
 type Group {
-  # Unique group ID
   id: ID!
-
-  # Name of the group
   name: String!
-
-  # Collection of members of the group
-  members: [Idol!]!
+  favedBy: [User!]
+  members: [Idol!]
+  inListings: [Listing!]
+  wantedByListings: [Listing!]
 }
 
 type Query {
-  groups(filter: GroupFilters, size: Int, pageNo: Int): [Group!]!
-  faveGroups: [Group!]!
+  groups(input: GroupFilters): [Group!]!
+}
+
+type Mutation {
+  insert_groups(input: [AddGroupInput!]!): [Group!]!
+  update_groups(input: [UpdateGroupInput!]!): [Group!]!
+  delete_groups(input: [UniqueGroupInput!]!): [Group!]!
 }

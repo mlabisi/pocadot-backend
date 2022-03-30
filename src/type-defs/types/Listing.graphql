@@ -1,55 +1,31 @@
-interface Listing {
+"""
+Represents a listing in the system
+"""
+type Listing {
   id: ID!
-  owner: User!
+  release: String
+  description: String
   condition: CardCondition!
-  idol: Idol!
-  release: String!
-  description: String!
-  countryOfOrigin: String!
-  internationalShipping: Boolean!
-}
-
-type SellListing implements Listing {
-  # Common fields
-  id: ID!
-  owner: User!
-  condition: CardCondition!
-  idol: Idol!
-  release: String!
-  description: String!
-  countryOfOrigin: String!
-  internationalShipping: Boolean!
-
-  # Minimum price for listing
-  minPrice: Float!
-}
-
-type TradeListing implements Listing {
-  # Common fields
-  id: ID!
-  owner: User!
-  condition: CardCondition!
-  idol: Idol!
-  release: String!
-  description: String!
-  countryOfOrigin: String!
-  internationalShipping: Boolean!
-
-  # Description of the desired photocard
-  tradeTargets: [TradeTarget]!
-
-  # Optional minimum price for listing
-  minPrice: Float
+  startingPrice: Float
+  country: String!
+  international: Boolean!
+  listedBy: User!
+  favedBy: [User!]
+  idols: [Idol!]!
+  groups: [Group!]
+  targetIdols: [Idol!]
+  targetMinCondition: CardCondition
+  targetGroups: [Group!]
+  type: [ListingType!]!
+  targetMinStaringPrice: Float
 }
 
 type Query {
-  listings(filter: ListingFilters, size: Int, pageNo: Int): [Listing!]!
-  faveListings: [Listing!]!
-  userListings: [Listing!]!
+  listings(filters: IdolFilters): [Listing!]!
 }
 
 type Mutation {
-  createListing(data: AddListingInput!): Listing!
-  updateListing(data: UpdateListingInput!, where: UniqueListingInput!): Listing!
-  removeListing(where: UniqueListingInput!): Listing!
+  insert_listings(input: [AddListingInput!]!): [Listing!]!
+  update_listings(input: [UpdateListingInput!]!): [Listing!]!
+  delete_listings(input: [UniqueListingInput!]!): [Listing!]!
 }

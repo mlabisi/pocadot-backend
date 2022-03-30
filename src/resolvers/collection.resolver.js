@@ -1,8 +1,8 @@
 module.exports = {
   Collection: {
-    id: (root) => root.id,
-    title: (root) => root.title,
-    owner: (root) => root.ownerId,
+    id: (collection) => collection.id,
+    title: (collection) => collection.title,
+    owner: (collection) => collection.ownerId,
   },
   Query: {
     collections: (root, args, context) => {},

@@ -2,32 +2,68 @@
 When adding a listing, all required fields must be specified
 """
 input AddListingInput {
-  owner: UniqueUserInput!
+  release: String
+  description: String
   condition: CardCondition!
-  idol: UniqueIdolInput!
-  release: String!
-  description: String!
-  countryOfOrigin: String!
-  internationalShipping: Boolean!
+  startingPrice: Float
+  country: String!
+  international: Boolean!
+  listedBy: UniqueUserInput!
+  idols: [UniqueIdolInput!]!
+  groups: [UniqueGroupInput!]
+  targetIdols: [UniqueIdolInput!]
+  targetMinCondition: CardCondition
+  targetGroups: [UniqueGroupInput!]
+  type: [ListingType!]!
+  targetMinStaringPrice: Float
 }
 
 """
 When updating a listing, only non-final fields can be updated
 """
 input UpdateListingInput {
-  condition: CardCondition!
-  idol: UniqueIdolInput
+  id: ID!
   release: String
   description: String
-  countryOfOrigin: String
-  internationalShipping: Boolean
+  condition: CardCondition
+  startingPrice: Float
+  country: String
+  international: Boolean
+  listedBy: UniqueUserInput
+  favedBy: [UniqueUserInput!]
+  idols: [UniqueIdolInput!]
+  groups: [UniqueGroupInput!]
+  targetIdols: [UniqueIdolInput!]
+  targetMinCondition: CardCondition
+  targetGroups: [UniqueGroupInput!]
+  type: [ListingType!]
+  targetMinStaringPrice: Float
 }
 
 """
 Available filters for the Listing type
 """
 input ListingFilters {
-  ids: [ID!]
+  id: [ID!]
+  release: [String!]
+  description: [String!]
+  condition: CardCondition
+  startingPrice: Float!
+  country: [String!]
+  international: Boolean
+  listedBy: [UniqueUserInput!]
+  favedBy: [UniqueUserInput!]
+  idols: [UniqueIdolInput!]
+  groups: [UniqueGroupInput!]
+  targetIdols: [UniqueIdolInput!]
+  targetMinCondition: CardCondition
+  targetGroups: [UniqueGroupInput!]
+  type: [ListingType!]
+  targetMinStaringPrice: Float
+  _filter: JSON
+  _order_by: JSON
+  _page_size: Int
+  _page: Int
 }
 
 input UniqueListingInput {

@@ -14,7 +14,3 @@ enum CardCondition {
   # Not opened, in original packaging
   NEW
 }
-
-type CardConditionWrapper {
-  conditions: CardCondition
-}

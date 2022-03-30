@@ -2,16 +2,20 @@
 Represents an idol in the system
 """
 type Idol {
-  # Unique idol ID
   id: ID!
-
-  # Stage name of the idol
   stageName: String!
-
-  # Group(s) to which this idol belongs
-  groups: [Group!]!
+  groups: [Group!]
+  inListings: [Listing!]
+  wantedByListings: [Listing!]
+  inCollections: [Collection!]
 }
 
 type Query {
-  idols(filter: IdolFilters, size: Int, pageNo: Int): [Idol!]!
+  idols(input: IdolFilters): [Idol!]!
+}
+
+type Mutation {
+  insert_idols(input: [AddIdolInput!]!): [Idol!]!
+  update_idols(input: [UpdateIdolInput!]!): [Idol!]!
+  delete_idols(input: [UniqueIdolInput!]!): [Idol!]!
 }

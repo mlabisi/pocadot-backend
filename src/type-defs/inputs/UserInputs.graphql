@@ -12,19 +12,31 @@ When updating a user, other existing fields can be added
 input UpdateUserInput {
   username: String
   country: String
-  listings: [UniqueListingInput!]
-  collections: [UniqueCollectionInput!]
-  faveGroups: [UniqueGroupInput!]
-  faveListings: [UniqueListingInput!]
-  faveUsers: [UniqueUserInput!]
+  listings: [UniqueListingInput!]!
+  collections: [UniqueCollectionInput!]!
+  faveGroups: [UniqueGroupInput!]!
+  faveListings: [UniqueListingInput!]!
+  faveUsers: [UniqueUserInput!]!
 }
 
 """
 Available filters for the User type
 """
 input UserFilters {
-  ids: [ID!]
-  listingIdolsContain: String
+  id: [ID!]
+  username: String
+  country: String
+  description: String
+  listings: [String!]!
+  faveGroups: [String!]!
+  faveListings: [String!]!
+  faveUsers: [String!]!
+  profilePicture: [JSON!]!
+  collections: [String!]!
+  _filter: JSON
+  _order_by: JSON
+  _page_size: Int
+  _page: Int
 }
 
 input UniqueUserInput {

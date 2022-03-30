@@ -70,6 +70,8 @@ model listings {
 model users {
   id                                  Int            @id(map: "users_pk") @unique(map: "users_id_uindex") @default(autoincrement())
   username                            String         @unique(map: "users_username_uindex") @db.VarChar
+  country                             String?        @db.VarChar
+  description                         String?        @db.VarChar
   collections                         collections[]
   faveGroups                          faveGroups[]
   faveListings                        faveListings[]
