@@ -29,8 +29,5 @@
     "apollo-server": "^3.6.6",
     "graphql": "^16.3.0",
     "prettier": "^2.6.1"
-  },
-  "devDependencies": {
-    "prisma": "^3.11.1"
   }
 }
