@@ -7,6 +7,7 @@ type Collection {
   description: String
   user: User!
   taggedIdols: [Idol!]
+  taggedGroups: [Group!]
 }
 
 type Query {

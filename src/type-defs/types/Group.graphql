@@ -8,6 +8,7 @@ type Group {
   members: [Idol!]
   inListings: [Listing!]
   wantedByListings: [Listing!]
+  inCollections: [Collection!]
   isFeatured: Boolean!
 }
 
