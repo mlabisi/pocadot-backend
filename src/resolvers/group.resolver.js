@@ -1,11 +1,13 @@
 module.exports = {
   Group: {
     id: (group) => group.id,
-    name: (group) => group.id,
+    name: (group) => group.name,
     favedBy: (group) => group.id,
     members: (group) => group.id,
     inListings: (group) => group.id,
     wantedByListings: (group) => group.id,
+    inCollections: (group) => group.id,
+    isFeatured: (group) => group.isFeatured,
   },
   Query: {
     groups: (root, args, context) => [],

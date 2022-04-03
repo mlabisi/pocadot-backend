@@ -1,11 +1,12 @@
 module.exports = {
   Idol: {
     id: (idol) => idol.id,
-    stageName: (idol) => idol.id,
+    stageName: (idol) => idol.stageName,
     groups: (idol) => idol.id,
     inListings: (idol) => idol.id,
     wantedByListings: (idol) => idol.id,
     inCollections: (idol) => idol.id,
+    isFeatured: (idol) => idol.isFeatured,
   },
   Query: {
     idols: (root, args, context) => [],
