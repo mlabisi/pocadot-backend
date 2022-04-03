@@ -27,7 +27,6 @@ input CollectionFilters {
   title: [String!]
   user: [UniqueUserInput!]
   taggedIdols: [UniqueIdolInput!]
-  _filter: JSON
   _order_by: JSON
   _page_size: Int
   _page: Int

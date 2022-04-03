@@ -60,7 +60,6 @@ input ListingFilters {
   targetGroups: [UniqueGroupInput!]
   type: [ListingType!]
   targetMinStaringPrice: Float
-  _filter: JSON
   _order_by: JSON
   _page_size: Int
   _page: Int

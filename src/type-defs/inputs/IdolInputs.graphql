@@ -24,12 +24,11 @@ Available filters for the Idol type
 """
 input IdolFilters {
   ids: [ID!]
-  stageName: [String!]
-  groups: [String!]
-  inListings: [String!]
-  wantedByListings: [String!]
-  inCollections: [String!]
-  _filter: JSON
+  stageNames: [String!]
+  group: ID
+  inListing: ID
+  wantedByListing: ID
+  inCollection: ID
   _order_by: JSON
   _page_size: Int
   _page: Int

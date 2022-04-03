@@ -4,5 +4,5 @@ const base = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY }).base(
 );
 
 module.exports = {
-  Airtable: base,
+  Airtable: { base },
 };

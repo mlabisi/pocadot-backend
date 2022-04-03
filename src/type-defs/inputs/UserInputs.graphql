@@ -33,7 +33,6 @@ input UserFilters {
   faveUsers: [String!]!
   profilePicture: [JSON!]!
   collections: [String!]!
-  _filter: JSON
   _order_by: JSON
   _page_size: Int
   _page: Int

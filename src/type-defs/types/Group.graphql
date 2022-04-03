@@ -5,7 +5,7 @@ type Group {
   id: ID!
   name: String!
   favedBy: [User!]
-  members: [Idol!]
+  idols: [Idol!]
   inListings: [Listing!]
   wantedByListings: [Listing!]
   inCollections: [Collection!]
