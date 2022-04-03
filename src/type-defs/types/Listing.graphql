@@ -8,6 +8,7 @@ type Listing {
   condition: CardCondition!
   startingPrice: Float
   country: String!
+  isFeatured: Boolean!
   international: Boolean!
   listedBy: User!
   favedBy: [User!]

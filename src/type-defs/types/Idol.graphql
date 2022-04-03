@@ -8,6 +8,7 @@ type Idol {
   inListings: [Listing!]
   wantedByListings: [Listing!]
   inCollections: [Collection!]
+  isFeatured: Boolean!
 }
 
 type Query {
