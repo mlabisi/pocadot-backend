@@ -1,12 +1,28 @@
 const { ApolloServer } = require('apollo-server');
-
+const { BaseRedisCache } = require('apollo-server-cache-redis');
+const Redis = require('ioredis');
 const { typeDefs, resolvers } = require('./schema');
-const context = require('./context');
+const services = require('./services');
+const { Groups, Idols } = require('./data-sources');
 
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context,
+  // cache: new BaseRedisCache({
+  //   client: new Redis({
+  //     host: 'redis-server',
+  //   }),
+  // }),
+  dataSources: () => ({
+      collections: {},
+      groups: new Groups(services.Airtable.base('groups')),
+      idols: new Idols(services.Airtable.base('idols')),
+      listings: {},
+      users: {}
+  }),
+  context: {
+    services,
+  },
 });
 
 server.listen().then(({ url }) => {
