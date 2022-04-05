@@ -20,8 +20,14 @@ type User {
   collections: [Collection!]
 }
 
+type UserFeed {
+  page: Int!
+  users: [User!]!
+}
+
 type Query {
-  users(filters: UserFilters): [User!]!
+  users(input: UserFilters!): [User!]!
+  usersFeed(page: Int!): UserFeed!
 }
 
 type Mutation {

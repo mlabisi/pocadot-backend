@@ -24,12 +24,13 @@ Available filters for the Collection type
 """
 input CollectionFilters {
   ids: [ID!]
+  fields: CollectionFilterFields
+}
+
+input CollectionFilterFields {
   title: [String!]
-  user: [UniqueUserInput!]
-  taggedIdols: [UniqueIdolInput!]
-  _order_by: JSON
-  _page_size: Int
-  _page: Int
+  user: [ID!]
+  taggedIdols: [ID!]
 }
 
 input UniqueCollectionInput {

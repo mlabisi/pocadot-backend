@@ -11,9 +11,14 @@ type Group {
   inCollections: [Collection!]
   isFeatured: Boolean!
 }
+type GroupFeed {
+  page: Int!
+  groups: [Group!]!
+}
 
 type Query {
-  groups(input: GroupFilters): [Group!]!
+  groups(input: GroupFilters!): [Group!]!
+  groupsFeed(page: Int!): GroupFeed!
 }
 
 type Mutation {

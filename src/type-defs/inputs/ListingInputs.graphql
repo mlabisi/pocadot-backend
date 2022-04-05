@@ -45,24 +45,24 @@ Available filters for the Listing type
 """
 input ListingFilters {
   id: [ID!]
+  fields: ListingFieldFilters
+}
+
+input ListingFieldFilters {
   release: [String!]
   description: [String!]
   condition: CardCondition
   startingPrice: Float!
   country: [String!]
   international: Boolean
-  listedBy: [UniqueUserInput!]
-  favedBy: [UniqueUserInput!]
-  idols: [UniqueIdolInput!]
-  groups: [UniqueGroupInput!]
-  targetIdols: [UniqueIdolInput!]
+  listedBy: [ID!]
+  favedBy: [ID!]
+  idols: [ID!]
+  groups: [ID!]
+  targetIdols: [ID!]
   targetMinCondition: CardCondition
-  targetGroups: [UniqueGroupInput!]
-  type: [ListingType!]
-  targetMinStaringPrice: Float
-  _order_by: JSON
-  _page_size: Int
-  _page: Int
+  targetGroups: [ID!]
+  type: ListingType
 }
 
 input UniqueListingInput {

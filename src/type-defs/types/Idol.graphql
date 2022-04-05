@@ -11,8 +11,14 @@ type Idol {
   isFeatured: Boolean!
 }
 
+type IdolFeed {
+  page: Int!
+  idols: [Idol!]!
+}
+
 type Query {
-  idols(input: IdolFilters): [Idol!]!
+  idols(input: IdolFilters!): [Idol!]!
+  idolsFeed(page: Int!): IdolFeed!
 }
 
 type Mutation {

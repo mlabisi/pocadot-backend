@@ -24,18 +24,18 @@ Available filters for the User type
 """
 input UserFilters {
   id: [ID!]
+  fields: UserFilterFields
+}
+
+input UserFilterFields {
   username: String
   country: String
   description: String
-  listings: [String!]!
-  faveGroups: [String!]!
-  faveListings: [String!]!
-  faveUsers: [String!]!
-  profilePicture: [JSON!]!
-  collections: [String!]!
-  _order_by: JSON
-  _page_size: Int
-  _page: Int
+  listings: [ID!]
+  faveGroups: [ID!]
+  faveListings: [ID!]
+  faveUsers: [ID!]
+  collections: [ID!]
 }
 
 input UniqueUserInput {

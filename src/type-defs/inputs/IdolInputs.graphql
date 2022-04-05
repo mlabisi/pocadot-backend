@@ -24,14 +24,15 @@ Available filters for the Idol type
 """
 input IdolFilters {
   ids: [ID!]
+  fields: IdolFilterFields
+}
+
+input IdolFilterFields {
   stageNames: [String!]
-  group: ID
-  inListing: ID
-  wantedByListing: ID
-  inCollection: ID
-  _order_by: JSON
-  _page_size: Int
-  _page: Int
+  group: [ID!]
+  inListing: [ID!]
+  wantedByListing: [ID!]
+  inCollection: [ID!]
 }
 
 input UniqueIdolInput {

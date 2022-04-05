@@ -23,14 +23,15 @@ Available filters for the Group type
 """
 input GroupFilters {
   ids: [ID!]
+  fields: GroupFilterFields
+}
+
+input GroupFilterFields {
   names: [String!]
-  favedBy: ID
-  idol: ID
-  inListing: ID
-  wantedByListing: ID
-  _order_by: JSON
-  _page_size: Int
-  _page: Int
+  favedBy: [ID!]
+  idol: [ID!]
+  inListing: [ID!]
+  wantedByListing: [ID!]
 }
 
 input UniqueGroupInput {

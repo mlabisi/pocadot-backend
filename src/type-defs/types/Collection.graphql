@@ -6,12 +6,18 @@ type Collection {
   title: String!
   description: String
   user: User!
-  taggedIdols: [Idol!]
+  taggedCollections: [Collection!]
   taggedGroups: [Group!]
 }
 
+type CollectionFeed {
+  page: Int!
+  collections: [Collection!]!
+}
+
 type Query {
-  collections(filters: CollectionFilters): [Collection!]!
+  collections(input: CollectionFilters!): [Collection!]!
+  collectionsFeed(page: Int!): CollectionFeed!
 }
 
 type Mutation {
