@@ -14,9 +14,11 @@ type Listing {
   favedBy: [User!]
   listings: [Listing!]!
   groups: [Group!]
+  idols: [Idol!]
   targetListings: [Listing!]
   targetMinCondition: CardCondition
   targetGroups: [Group!]
+  targetIdols: [Idol!]
   type: [ListingType!]!
   targetMinStaringPrice: Float
 }

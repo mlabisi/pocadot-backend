@@ -29,7 +29,9 @@ input CollectionFilters {
 
 input CollectionFilterFields {
   title: [String!]
+  description: String
   user: [ID!]
+  taggedGroups: [ID!]
   taggedIdols: [ID!]
 }
 
