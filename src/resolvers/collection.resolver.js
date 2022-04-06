@@ -8,35 +8,22 @@ module.exports = {
     taggedGroups: ({ fields }) => fields.id,
   },
   Query: {
-    collections: (root, args, context) => {
-      const { Airtable } = context;
-      const results = [];
-
-      const selectClause = {
-        view: "Grid view"
-      };
-
-      if (args._page_size) {
-        selectClause.maxRecords = args._page_size;
+    collections: async (root, { ids, fields }, { dataSources }) => {
+      if (ids) {
+        return ids.length === 1
+          ? dataSources.collections.getCollectionById(ids[0])
+          : dataSources.collections.getCollectionById(ids);
       }
 
-      Airtable.base('collections').select(selectClause).eachPage(function page(records, fetchNextPage) {
-        // This function (`page`) will get called for each page of records.
-
-        records.forEach(function(record) {
-          results.push(record.fields);
-        });
-
-        // To fetch the next page of records, call `fetchNextPage`.
-        // If there are more records, `page` will get called again.
-        // If there are no more records, `done` will get called.
-        fetchNextPage();
-
-      }, function done(err) {
-        if (err) { console.error(err);  }
-      });
-
-      return results;
+      if (fields) {
+        return dataSources.collections.getCollectionsByFields(fields);
+      }
+    },
+    collectionsFeed: async (root, { page }, { dataSources }) => {
+      return {
+        page,
+        collections: await dataSources.collections.getAll(),
+      };
     },
   },
   Mutation: {

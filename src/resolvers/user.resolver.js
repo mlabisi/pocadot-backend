@@ -13,35 +13,22 @@ module.exports = {
     isFeatured: ({ fields }) => fields.isFeatured,
   },
   Query: {
-    users: (root, args, context) => {
-      const { Airtable } = context;
-      const results = [];
-
-      const selectClause = {
-        view: "Grid view"
-      };
-
-      if (args._page_size) {
-        selectClause.maxRecords = args._page_size;
+    users: async (root, { ids, fields }, { dataSources }) => {
+      if (ids) {
+        return ids.length === 1
+          ? dataSources.users.getUserById(ids[0])
+          : dataSources.users.getUserById(ids);
       }
 
-      Airtable.base('users').select(selectClause).eachPage(function page(records, fetchNextPage) {
-        // This function (`page`) will get called for each page of records.
-
-        records.forEach(function(record) {
-          results.push(record.fields);
-        });
-
-        // To fetch the next page of records, call `fetchNextPage`.
-        // If there are more records, `page` will get called again.
-        // If there are no more records, `done` will get called.
-        fetchNextPage();
-
-      }, function done(err) {
-        if (err) { console.error(err);  }
-      });
-
-      return results;
+      if (fields) {
+        return dataSources.users.getUsersByFields(fields);
+      }
+    },
+    usersFeed: async (root, { page }, { dataSources }) => {
+      return {
+        page,
+        users: await dataSources.users.getAll(),
+      };
     },
   },
   Mutation: {

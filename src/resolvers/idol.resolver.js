@@ -20,12 +20,10 @@ module.exports = {
         return dataSources.idols.getIdolsByFields(fields);
       }
     },
-    idolsFeed: async (root, { page }, { services }) => {
-      const { Airtable } = services;
-      const idols = Airtable.getPage('idols', page);
+    idolsFeed: async (root, { page }, { dataSources }) => {
       return {
         page,
-        idols,
+        idols: await dataSources.idols.getAll(),
       };
     },
   },
