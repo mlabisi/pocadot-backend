@@ -28,11 +28,11 @@ input IdolFilters {
 }
 
 input IdolFilterFields {
-  stageNames: [String!]
-  group: [ID!]
-  inListing: [ID!]
-  wantedByListing: [ID!]
-  inCollection: [ID!]
+  stageName: [String!]
+  groups: [ID!]
+  inListings: [ID!]
+  wantedByListings: [ID!]
+  inCollections: [ID!]
 }
 
 input UniqueIdolInput {

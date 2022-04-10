@@ -1,15 +1,18 @@
 module.exports = {
   Idol: {
     id: (idol) => idol.id,
-    stageName: ({ fields }) => fields.stageName,
-    groups: ({ fields }) => fields.id,
-    inListings: ({ fields }) => fields.id,
-    wantedByListings: ({ fields }) => fields.id,
-    inCollections: ({ fields }) => fields.id,
-    isFeatured: ({ fields }) => fields.isFeatured,
+    stageName: ({fields}) => fields.stageName,
+    groups: async (idol, __, { dataSources }) =>
+      await dataSources.idols.getGroups(idol.id) ?? [],
+    inListings: (idol, __, { dataSources }) => [],
+    wantedByListings: (idol, __, { dataSources }) => [],
+    inCollections: (idol, __, { dataSources }) => [],
+    isFeatured: ({ fields }) => fields.isFeatured ?? false,
   },
   Query: {
-    idols: async (root, { ids, fields }, { dataSources }) => {
+    idols: async (root, { input }, { dataSources }) => {
+      const { ids, fields } = input;
+
       if (ids) {
         return ids.length === 1
           ? dataSources.idols.getIdolById(ids[0])
@@ -17,12 +20,11 @@ module.exports = {
       }
 
       if (fields) {
-        return dataSources.idols.getIdolsByFields(fields);
+        return dataSources.idols.getByFields(fields);
       }
     },
-    idolsFeed: async (root, { page }, { dataSources }) => {
+    idolsFeed: async (root, _, { dataSources }) => {
       return {
-        page,
         idols: await dataSources.idols.getAll(),
       };
     },

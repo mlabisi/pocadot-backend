@@ -1,24 +1,18 @@
-const {
-  AirtableDataSource,
-} = require('../../../../apollo-datasource-airtable/src/index'); // require('apollo-datasource-airtable');
+const { BaseDataSource } = require('../Base');
+const services = require('../../services');
 
-module.exports.Idols = class extends AirtableDataSource {
-  constructor(table) {
-    super(table);
-  }
-  getById(id) {
-    return this.findOneByIds(id, { ttl: 1440 });
+module.exports.Idols = class extends BaseDataSource {
+  constructor() {
+    super(services.Airtable.base('idols'));
   }
 
-  getByIds(ids) {
-    return this.findManyByIds(ids, { ttl: 1440 });
-  }
+  async getGroups(id) {
+    const groupIds = await new Promise((resolve) => {
+      this.table.find(id, (err, record) => {
+        resolve(record._rawJson.fields.groups);
+      });
+    });
 
-  getAll() {
-    return this.findAll({ ttl: 1440 });
-  }
-
-  getByFields(fields) {
-    return this.findByFields(fields, { ttl: 1440 });
+    return groupIds.map((groupId) => this.context.dataSources.groups.getById(groupId));
   }
 }

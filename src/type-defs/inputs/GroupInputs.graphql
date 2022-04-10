@@ -27,11 +27,11 @@ input GroupFilters {
 }
 
 input GroupFilterFields {
-  names: [String!]
+  name: [String!]
   favedBy: [ID!]
-  idol: [ID!]
-  inListing: [ID!]
-  wantedByListing: [ID!]
+  idols: [ID!]
+  inListings: [ID!]
+  wantedByListings: [ID!]
 }
 
 input UniqueGroupInput {

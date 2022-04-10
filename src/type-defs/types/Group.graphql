@@ -12,13 +12,13 @@ type Group {
   isFeatured: Boolean!
 }
 type GroupFeed {
-  page: Int!
+#  page: Int!
   groups: [Group!]!
 }
 
 type Query {
   groups(input: GroupFilters!): [Group!]!
-  groupsFeed(page: Int!): GroupFeed!
+  groupsFeed: GroupFeed!
 }
 
 type Mutation {

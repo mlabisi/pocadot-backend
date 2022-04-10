@@ -3,7 +3,7 @@ const { BaseRedisCache } = require('apollo-server-cache-redis');
 const Redis = require('ioredis');
 const { typeDefs, resolvers } = require('./schema');
 const services = require('./services');
-const { Groups, Idols } = require('./data-sources');
+const { Groups, Idols, Users } = require('./data-sources');
 
 const server = new ApolloServer({
   typeDefs,
@@ -18,7 +18,7 @@ const server = new ApolloServer({
       groups: new Groups(services.Airtable.base('groups')),
       idols: new Idols(services.Airtable.base('idols')),
       listings: {},
-      users: {}
+      users: new Users()
   }),
   context: {
     services,
