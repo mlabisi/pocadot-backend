@@ -8,11 +8,13 @@ const { Groups, Idols, Users } = require('./data-sources');
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  // cache: new BaseRedisCache({
-  //   client: new Redis({
-  //     host: 'redis-server',
-  //   }),
-  // }),
+  cache: new BaseRedisCache({
+    client: new Redis(process.env.REDISCLOUD_URL),
+  }),
+
+  context: {
+    services,
+  },
   dataSources: () => ({
     collections: {},
     groups: new Groups(),
@@ -20,9 +22,6 @@ const server = new ApolloServer({
     listings: {},
     users: new Users()
   }),
-  context: {
-    services,
-  },
 });
 
 server.listen().then(({ url }) => {
