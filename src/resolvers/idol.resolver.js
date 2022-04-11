@@ -29,9 +29,4 @@ module.exports = {
       };
     },
   },
-  Mutation: {
-    insert_idols: (root, args, context) => [],
-    update_idols: (root, args, context) => [],
-    delete_idols: (root, args, context) => [],
-  },
 };

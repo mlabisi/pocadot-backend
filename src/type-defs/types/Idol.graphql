@@ -20,9 +20,3 @@ type Query {
   idols(input: IdolFilters!): [Idol!]!
   idolsFeed(page: Int!): IdolFeed!
 }
-
-type Mutation {
-  insert_idols(input: [AddIdolInput!]!): [Idol!]!
-  update_idols(input: [UpdateIdolInput!]!): [Idol!]!
-  delete_idols(input: [UniqueIdolInput!]!): [Idol!]!
-}

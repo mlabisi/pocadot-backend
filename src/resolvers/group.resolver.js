@@ -32,9 +32,4 @@ module.exports = {
       };
     },
   },
-  Mutation: {
-    insert_groups: (root, args, context) => [],
-    update_groups: (root, args, context) => [],
-    delete_groups: (root, args, context) => [],
-  },
 };

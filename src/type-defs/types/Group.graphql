@@ -20,9 +20,3 @@ type Query {
   groups(input: GroupFilters!): [Group!]!
   groupsFeed: GroupFeed!
 }
-
-type Mutation {
-  insert_groups(input: [AddGroupInput!]!): [Group!]!
-  update_groups(input: [UpdateGroupInput!]!): [Group!]!
-  delete_groups(input: [UniqueGroupInput!]!): [Group!]!
-}
