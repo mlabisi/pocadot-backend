@@ -7,18 +7,18 @@ module.exports.Idols = class extends BaseDataSource {
   }
 
   async getGroups(id) {
-    return this.getAssociated(id, "groups", "groups");
+    return this.getLinked(id, "groups", "groups");
   }
 
   async getInListings(id) {
-    return this.getAssociated(id, "inListings", "listings");
+    return this.getLinked(id, "inListings", "listings");
   }
 
   async getWantedByListings(id) {
-    return this.getAssociated(id, "wantedByListings", "listings");
+    return this.getLinked(id, "wantedByListings", "listings");
   }
 
   async getInCollections(id) {
-    return this.getAssociated(id, "inCollections", "collections");
+    return this.getLinked(id, "inCollections", "collections");
   }
 }

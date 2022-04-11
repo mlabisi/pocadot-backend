@@ -7,22 +7,22 @@ module.exports.Groups = class extends BaseDataSource {
   }
 
   async getFavedBy(id) {
-    return this.getAssociated(id, "favedBy", "users");
+    return this.getLinked(id, "favedBy", "users");
   }
 
   async getIdols(id) {
-    return this.getAssociated(id, "members", "idols");
+    return this.getLinked(id, "members", "idols");
   }
 
   async getInListings(id) {
-    return this.getAssociated(id, "inListings", "listings");
+    return this.getLinked(id, "inListings", "listings");
   }
 
   async getWantedByListings(id) {
-    return this.getAssociated(id, "wantedByListings", "listings");
+    return this.getLinked(id, "wantedByListings", "listings");
   }
 
   async getInCollections(id) {
-    return this.getAssociated(id, "inCollections", "collections");
+    return this.getLinked(id, "inCollections", "collections");
   }
 };

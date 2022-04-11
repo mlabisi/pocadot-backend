@@ -23,20 +23,20 @@ module.exports.BaseDataSource = class extends AirtableDataSource {
     return this.findByFields(fields, { ttl });
   }
 
-  async getAssociated(id, fieldName, associatedTable) {
+  async getLinked(id, fieldName, linkedTable) {
     const ids = await new Promise((resolve, reject) => {
       this.table.find(id, (err, record) => {
           if (err) {
             return reject(err);
           }
-
+          
           return resolve(record._rawJson.fields[fieldName] ?? []);
         }
       );
     });
 
-    return ids.map((associatedId) =>
-      this.context.dataSources[associatedTable].getById(associatedId),
+    return ids.map((linkedId) =>
+      this.context.dataSources[linkedTable].getById(linkedId),
     );
   }
 };
