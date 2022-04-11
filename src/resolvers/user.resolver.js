@@ -1,6 +1,6 @@
 module.exports = {
   User: {
-    id: (user) => user.id,
+    id: ({fields}, __, ___) => fields.id,
     username: ({ fields }) => fields.username,
     country: ({ fields }) => fields.country,
     description: ({ fields }) => fields.description,

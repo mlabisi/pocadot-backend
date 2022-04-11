@@ -1,6 +1,6 @@
 module.exports = {
   Listing: {
-    id: (listing) => listing.id,
+    id: ({fields}, __, ___) => fields.id,
     release: ({ fields }) => fields.release,
     description: ({ fields }) => fields.description,
     condition: ({ fields }) => fields.condition,

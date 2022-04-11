@@ -1,6 +1,6 @@
 module.exports = {
   Collection: {
-    id: (collection) => collection.id,
+    id: ({fields}, __, ___) => fields.id,
     title: ({ fields }) => fields.title,
     description: ({ fields }) => fields.description,
     user: ({ fields }) => fields.id,

@@ -1,15 +1,15 @@
 module.exports = {
   Idol: {
-    id: (idol, __, ___) => idol.id,
-    stageName: ({fields}, __, ___) => fields.stageName,
+    id: ({ fields }, __, ___) => fields.id,
+    stageName: ({ fields }, __, ___) => fields.stageName,
     groups: async (idol, __, { dataSources }) =>
-      await dataSources.idols.getGroups(idol.id) ?? [],
+      (await dataSources.idols.getGroups(idol.id)) ?? [],
     inListings: async (idol, __, { dataSources }) =>
-      await dataSources.idols.getInListings(idol.id) ?? [],
+      (await dataSources.idols.getInListings(idol.id)) ?? [],
     wantedByListings: async (idol, __, { dataSources }) =>
-      await dataSources.idols.getWantedByListings(idol.id) ?? [],
+      (await dataSources.idols.getWantedByListings(idol.id)) ?? [],
     inCollections: async (idol, __, { dataSources }) =>
-      await dataSources.idols.getInCollections(idol.id) ?? [],
+      (await dataSources.idols.getInCollections(idol.id)) ?? [],
     isFeatured: ({ fields }) => fields.isFeatured ?? false,
   },
   Query: {
