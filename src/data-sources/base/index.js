@@ -22,4 +22,21 @@ module.exports.BaseDataSource = class extends AirtableDataSource {
   getByFields(fields, ttl = 1440) {
     return this.findByFields(fields, { ttl });
   }
-}
+
+  async getAssociated(id, fieldName, associatedTable) {
+    const ids = await new Promise((resolve, reject) => {
+      this.table.find(id, (err, record) => {
+          if (err) {
+            return reject(err);
+          }
+
+          return resolve(record._rawJson.fields[fieldName] ?? []);
+        }
+      );
+    });
+
+    return ids.map((associatedId) =>
+      this.context.dataSources[associatedTable].getById(associatedId),
+    );
+  }
+};

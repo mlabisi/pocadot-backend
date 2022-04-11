@@ -14,11 +14,11 @@ const server = new ApolloServer({
   //   }),
   // }),
   dataSources: () => ({
-      collections: {},
-      groups: new Groups(services.Airtable.base('groups')),
-      idols: new Idols(services.Airtable.base('idols')),
-      listings: {},
-      users: new Users()
+    collections: {},
+    groups: new Groups(),
+    idols: new Idols(),
+    listings: {},
+    users: new Users()
   }),
   context: {
     services,
