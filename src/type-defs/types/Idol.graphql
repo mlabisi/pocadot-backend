@@ -4,6 +4,7 @@ Represents an idol in the system
 type Idol {
   id: ID!
   stageName: String!
+  favedBy: [User!]
   groups: [Group!]
   inListings: [Listing!]
   wantedByListings: [Listing!]
