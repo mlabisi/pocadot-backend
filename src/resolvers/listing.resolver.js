@@ -1,6 +1,6 @@
 module.exports = {
   Listing: {
-    id: ({fields}, __, ___) => fields.id,
+    id: ({ fields }, __, ___) => fields.id,
     release: ({ fields }) => fields.release,
     description: ({ fields }) => fields.description,
     condition: ({ fields }) => fields.condition,
@@ -8,13 +8,19 @@ module.exports = {
     country: ({ fields }) => fields.country,
     isFeatured: ({ fields }) => fields.isFeatured,
     international: ({ fields }) => fields.international,
-    listedBy: ({ fields }) => fields.id,
-    favedBy: ({ fields }) => fields.id,
-    idols: ({ fields }) => fields.id,
-    groups: ({ fields }) => fields.id,
-    targetIdols: ({ fields }) => fields.id,
+    listedBy: async (listing, __, { dataSources }) =>
+      (await dataSources.listings.getListedBy(listing.id)) ?? {},
+    favedBy: async (listing, __, { dataSources }) =>
+      (await dataSources.listings.getFavedBy(listing.id)) ?? [],
+    idols: async (listing, __, { dataSources }) =>
+      (await dataSources.listings.getIdols(listing.id)) ?? [],
+    groups: async (listing, __, { dataSources }) =>
+      (await dataSources.listings.getGroups(listing.id)) ?? [],
+    targetIdols: async (listing, __, { dataSources }) =>
+      (await dataSources.listings.getTargetIdols(listing.id)) ?? [],
     targetMinCondition: ({ fields }) => fields.targetMinCondition,
-    targetGroups: ({ fields }) => fields.id,
+    targetGroups: async (listing, __, { dataSources }) =>
+      (await dataSources.listings.getTargetGroups(listing.id)) ?? [],
     targetMinStaringPrice: ({ fields }) => fields.targetMinStaringPrice,
     type: ({ fields }) => fields.type,
   },
@@ -22,12 +28,12 @@ module.exports = {
     listings: async (root, { ids, fields }, { dataSources }) => {
       if (ids) {
         return ids.length === 1
-          ? dataSources.listings.getListingById(ids[0])
-          : dataSources.listings.getListingById(ids);
+          ? dataSources.listings.getById(ids[0])
+          : dataSources.listings.getByIds(ids);
       }
 
       if (fields) {
-        return dataSources.listings.getListingsByFields(fields);
+        return dataSources.listings.getByFields(fields);
       }
     },
     listingsFeed: async (root, { page }, { dataSources }) => {
