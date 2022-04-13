@@ -28,6 +28,7 @@ const server = new ApolloServer({
     listings: new Listings(),
     users: new Users(),
   }),
+  introspection: true
 });
 
 server
