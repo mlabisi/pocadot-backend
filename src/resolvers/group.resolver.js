@@ -1,6 +1,6 @@
 module.exports = {
   Group: {
-    id: ({ fields }, __, ___) => fields.id,
+    id: (group, __, ___) => group.id,
     name: ({ fields }, __, ___) => fields.name ?? '',
     favedBy: async (group, __, { dataSources }) =>
       (await dataSources.groups.getFavedBy(group.id)) ?? [],

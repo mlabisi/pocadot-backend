@@ -1,5 +1,5 @@
 const { BaseDataSource } = require('../base');
-const services = require('../../services'); // require('apollo-datasource-airtable');
+const services = require('../../services');
 
 module.exports.Groups = class extends BaseDataSource {
   constructor() {
