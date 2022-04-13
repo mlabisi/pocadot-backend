@@ -2,6 +2,8 @@ module.exports = {
   Idol: {
     id: ({ fields }, __, ___) => fields.id,
     stageName: ({ fields }, __, ___) => fields.stageName,
+    favedBy: async (idol, __, { dataSources }) =>
+      (await dataSources.idol.getFavedBy(idol.id)) ?? [],
     groups: async (idol, __, { dataSources }) =>
       (await dataSources.idols.getGroups(idol.id)) ?? [],
     inListings: async (idol, __, { dataSources }) =>
@@ -18,15 +20,15 @@ module.exports = {
 
       if (ids) {
         return ids.length === 1
-          ? dataSources.idols.getIdolById(ids[0])
-          : dataSources.idols.getIdolById(ids);
+          ? dataSources.idols.getById(ids[0])
+          : dataSources.idols.getByIds(ids);
       }
 
       if (fields) {
         return dataSources.idols.getByFields(fields);
       }
     },
-    idolsFeed: async (root, _, { dataSources }) => {
+    idolsFeed: async (root, __, { dataSources }) => {
       return {
         idols: await dataSources.idols.getAll(),
       };

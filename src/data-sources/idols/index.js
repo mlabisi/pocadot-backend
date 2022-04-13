@@ -6,6 +6,10 @@ module.exports.Idols = class extends BaseDataSource {
     super(services.Airtable.base('idols'));
   }
 
+  async getFavedBy(id) {
+    return this.getLinked(id, "favedBy", "users");
+  }
+
   async getGroups(id) {
     return this.getLinked(id, "groups", "groups");
   }
