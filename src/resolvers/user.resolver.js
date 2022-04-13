@@ -17,7 +17,7 @@ module.exports = {
     profilePicture: ({ fields }) => fields.profilePicture,
     collections: async (user, __, { dataSources }) =>
       (await dataSources.users.getCollections(user.id)) ?? [],
-    isFeatured: ({ fields }) => fields.isFeatured,
+    isFeatured: ({ fields }) => fields.isFeatured ?? false,
   },
   Query: {
     users: async (root, { ids, fields }, { dataSources }) => {
@@ -39,8 +39,14 @@ module.exports = {
     },
   },
   Mutation: {
-    addUsers: (root, args, context) => {},
-    updateUsers: (root, args, context) => {},
-    deleteUsers: (root, args, context) => {},
+    addUsers: async (_, { input }, { dataSources }) => {
+      return dataSources.users.create(input);
+    },
+    updateUsers: async (_, { input }, { dataSources }) => {
+      return dataSources.users.update(input);
+    },
+    deleteUsers: async (_, { input }, { dataSources }) => {
+      return dataSources.users.delete(input);
+    },
   },
 };

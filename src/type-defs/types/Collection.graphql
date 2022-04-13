@@ -23,5 +23,5 @@ type Query {
 type Mutation {
   addCollections(input: [AddCollectionInput!]!): [Collection!]!
   updateCollections(input: [UpdateCollectionInput!]!): [Collection!]!
-  deleteCollections(input: [UniqueCollectionInput!]!): [Collection!]!
+  deleteCollections(input: [ID!]!): [ID!]!
 }

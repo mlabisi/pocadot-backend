@@ -6,7 +6,7 @@ module.exports = {
     condition: ({ fields }) => fields.condition,
     startingPrice: ({ fields }) => fields.startingPrice,
     country: ({ fields }) => fields.country,
-    isFeatured: ({ fields }) => fields.isFeatured,
+    isFeatured: ({ fields }) => fields.isFeatured ?? false,
     international: ({ fields }) => fields.international,
     listedBy: async (listing, __, { dataSources }) =>
       (await dataSources.listings.getListedBy(listing.id)) ?? {},
@@ -44,8 +44,14 @@ module.exports = {
     },
   },
   Mutation: {
-    addListings: (root, args, context) => {},
-    updateListings: (root, args, context) => {},
-    deleteListings: (root, args, context) => {},
+    addListings: async (_, { input }, { dataSources }) => {
+      return dataSources.listings.create(input);
+    },
+    updateListings: async (_, { input }, { dataSources }) => {
+      return dataSources.listings.update(input);
+    },
+    deleteListings: async (_, { input }, { dataSources }) => {
+      return dataSources.listings.delete(input);
+    },
   },
 };

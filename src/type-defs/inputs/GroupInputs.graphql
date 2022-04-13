@@ -3,7 +3,7 @@ When adding a group, idols can be created and/or connnected
 """
 input AddGroupInput {
   name: String!
-  idols: [UniqueIdolInput!]
+  idols: [ID!]
 }
 
 """
@@ -12,10 +12,10 @@ When updating a group, all fields can be updated
 input UpdateGroupInput {
   id: ID!
   name: String
-  idols: [UniqueIdolInput!]
-  favedBy: [UniqueUserInput!]
-  inListings: [UniqueListingInput!]
-  wantedByListings: [UniqueListingInput!]
+  idols: [ID!]
+  favedBy: [ID!]
+  inListings: [ID!]
+  wantedByListings: [ID!]
 }
 
 """
@@ -32,8 +32,4 @@ input GroupFilterFields {
   idols: [ID!]
   inListings: [ID!]
   wantedByListings: [ID!]
-}
-
-input UniqueGroupInput {
-  id: ID!
 }

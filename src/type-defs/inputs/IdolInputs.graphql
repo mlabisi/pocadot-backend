@@ -4,7 +4,7 @@ When adding an idol, the group must exist first
 input AddIdolInput {
   id: ID!
   stageName: String!
-  groups: [UniqueGroupInput!]
+  groups: [ID!]
 }
 
 """
@@ -13,10 +13,10 @@ When updating an idol, all fields can be updated
 input UpdateIdolInput {
   id: ID!
   stageName: String
-  groups: [UniqueGroupInput!]
-  inListings: [UniqueListingInput!]
-  wantedByListings: [UniqueListingInput!]
-  inCollections: [UniqueCollectionInput!]
+  groups: [ID!]
+  inListings: [ID!]
+  wantedByListings: [ID!]
+  inCollections: [ID!]
 }
 
 """
@@ -33,8 +33,4 @@ input IdolFilterFields {
   inListings: [ID!]
   wantedByListings: [ID!]
   inCollections: [ID!]
-}
-
-input UniqueIdolInput {
-  id: ID!
 }

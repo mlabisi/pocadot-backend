@@ -13,12 +13,12 @@ input UpdateUserInput {
   id: ID!
   username: String
   country: String
-  listings: [UniqueListingInput!]
-  collections: [UniqueCollectionInput!]
-  faveGroups: [UniqueGroupInput!]
-  faveIdols: [UniqueIdolInput!]
-  faveListings: [UniqueListingInput!]
-  faveUsers: [UniqueUserInput!]
+  listings: [ID!]
+  collections: [ID!]
+  faveGroups: [ID!]
+  faveIdols: [ID!]
+  faveListings: [ID!]
+  faveUsers: [ID!]
 }
 
 """
@@ -39,8 +39,4 @@ input UserFilterFields {
   faveListings: [ID!]
   faveUsers: [ID!]
   collections: [ID!]
-}
-
-input UniqueUserInput {
-  id: ID!
 }

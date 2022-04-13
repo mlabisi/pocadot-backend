@@ -4,8 +4,8 @@ When adding a collection, all required fields must be specified
 input AddCollectionInput {
   title: String
   description: String!
-  user: UniqueUserInput!
-  taggedIdols: [UniqueIdolInput!]!
+  user: ID!
+  taggedIdols: [ID!]
 }
 
 """
@@ -15,8 +15,8 @@ input UpdateCollectionInput {
   id: ID!
   title: String
   description: String
-  user: UniqueUserInput
-  taggedIdols: [UniqueIdolInput!]
+  user: ID
+  taggedIdols: [ID!]
 }
 
 """
@@ -33,8 +33,4 @@ input CollectionFilterFields {
   user: [ID!]
   taggedGroups: [ID!]
   taggedIdols: [ID!]
-}
-
-input UniqueCollectionInput {
-  id: ID!
 }

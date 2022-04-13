@@ -8,12 +8,12 @@ input AddListingInput {
   startingPrice: Float
   country: String!
   international: Boolean!
-  listedBy: UniqueUserInput!
-  idols: [UniqueIdolInput!]!
-  groups: [UniqueGroupInput!]
-  targetIdols: [UniqueIdolInput!]
+  listedBy: ID!
+  idols: [ID!]!
+  groups: [ID!]
+  targetIdols: [ID!]
   targetMinCondition: CardCondition
-  targetGroups: [UniqueGroupInput!]
+  targetGroups: [ID!]
   type: [ListingType!]!
   targetMinStaringPrice: Float
 }
@@ -29,13 +29,13 @@ input UpdateListingInput {
   startingPrice: Float
   country: String
   international: Boolean
-  listedBy: UniqueUserInput
-  favedBy: [UniqueUserInput!]
-  idols: [UniqueIdolInput!]
-  groups: [UniqueGroupInput!]
-  targetIdols: [UniqueIdolInput!]
+  listedBy: ID
+  favedBy: [ID!]
+  idols: [ID!]
+  groups: [ID!]
+  targetIdols: [ID!]
   targetMinCondition: CardCondition
-  targetGroups: [UniqueGroupInput!]
+  targetGroups: [ID!]
   type: [ListingType!]
   targetMinStaringPrice: Float
 }
@@ -63,8 +63,4 @@ input ListingFieldFilters {
   targetMinCondition: CardCondition
   targetGroups: [ID!]
   type: ListingType
-}
-
-input UniqueListingInput {
-  id: ID!
 }

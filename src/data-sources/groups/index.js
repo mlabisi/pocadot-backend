@@ -25,4 +25,16 @@ module.exports.Groups = class extends BaseDataSource {
   async getInCollections(id) {
     return this.getLinked(id, "inCollections", "collections");
   }
+
+  create(items) {
+    throw new Error('NOT ALLOWED');
+  }
+
+  update(items) {
+    throw new Error('NOT ALLOWED');
+  }
+
+  delete(ids) {
+    throw new Error('NOT ALLOWED');
+  }
 };

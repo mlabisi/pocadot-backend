@@ -34,5 +34,5 @@ type Query {
 type Mutation {
   addUsers(input: [AddUserInput!]!): [User!]!
   updateUsers(input: [UpdateUserInput!]!): [User!]!
-  deleteUsers(input: [UniqueUserInput!]!): [User!]!
+  deleteUsers(input: [ID!]!): [ID!]!
 }

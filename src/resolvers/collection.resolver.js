@@ -30,8 +30,14 @@ module.exports = {
     },
   },
   Mutation: {
-    addCollections: (_, args, context) => [],
-    updateCollections: (root, args, context) => [],
-    deleteCollections: (root, args, context) => [],
+    addCollections: async (_, { input }, { dataSources }) => {
+      return dataSources.collections.create(input);
+    },
+    updateCollections: async (_, { input }, { dataSources }) => {
+      return dataSources.collections.update(input);
+    },
+    deleteCollections: async (_, { input }, { dataSources }) => {
+      return dataSources.collections.delete(input);
+    },
   },
 };
