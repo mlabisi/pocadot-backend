@@ -1,3 +1,4 @@
+const { getPage } = require('../util');
 module.exports = {
   Group: {
     id: (group, __, ___) => group.id,
@@ -31,7 +32,7 @@ module.exports = {
     groupsFeed: async (root, { page }, { dataSources }) => {
       return {
         page,
-        groups: await dataSources.groups.getAll(),
+        groups: await getPage(page, dataSources.groups),
       };
     },
   },

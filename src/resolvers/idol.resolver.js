@@ -1,3 +1,4 @@
+const { getPage } = require('../util');
 module.exports = {
   Idol: {
     id: ({ fields }, __, ___) => fields.id,
@@ -28,9 +29,10 @@ module.exports = {
         return dataSources.idols.getByFields(fields);
       }
     },
-    idolsFeed: async (root, __, { dataSources }) => {
+    idolsFeed: async (root, { page }, { dataSources }) => {
       return {
-        idols: await dataSources.idols.getAll(),
+        page,
+        idols: await getPage(page, dataSources.idols),
       };
     },
   },

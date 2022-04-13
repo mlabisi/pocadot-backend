@@ -1,3 +1,4 @@
+const { getPage } = require('../util');
 module.exports = {
   Listing: {
     id: ({ fields }, __, ___) => fields.id,
@@ -39,7 +40,7 @@ module.exports = {
     listingsFeed: async (root, { page }, { dataSources }) => {
       return {
         page,
-        listings: await dataSources.listings.getAll(),
+        listings: await getPage(page, dataSources.listings),
       };
     },
   },
