@@ -10,20 +10,22 @@ input AddUserInput {
 When updating a user, other existing fields can be added
 """
 input UpdateUserInput {
+  id: ID!
   username: String
   country: String
-  listings: [UniqueListingInput!]!
-  collections: [UniqueCollectionInput!]!
-  faveGroups: [UniqueGroupInput!]!
-  faveListings: [UniqueListingInput!]!
-  faveUsers: [UniqueUserInput!]!
+  listings: [UniqueListingInput!]
+  collections: [UniqueCollectionInput!]
+  faveGroups: [UniqueGroupInput!]
+  faveIdols: [UniqueIdolInput!]
+  faveListings: [UniqueListingInput!]
+  faveUsers: [UniqueUserInput!]
 }
 
 """
 Available filters for the User type
 """
 input UserFilters {
-  id: [ID!]
+  ids: [ID!]
   fields: UserFilterFields
 }
 
@@ -33,6 +35,7 @@ input UserFilterFields {
   description: String
   listings: [ID!]
   faveGroups: [ID!]
+  faveIdols: [ID!]
   faveListings: [ID!]
   faveUsers: [ID!]
   collections: [ID!]

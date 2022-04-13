@@ -5,4 +5,28 @@ module.exports.Users = class extends BaseDataSource {
   constructor() {
     super(services.Airtable.base('users'));
   }
+
+  async getListings(id) {
+    return this.getLinked(id, 'listings', 'listings');
+  }
+
+  async getFaveUsers(id) {
+    return this.getLinked(id, 'faveUsers', 'users');
+  }
+
+  async getFaveIdols(id) {
+    return this.getLinked(id, 'faveIdols', 'idols');
+  }
+
+  async getFaveGroups(id) {
+    return this.getLinked(id, 'faveGroups', 'groups');
+  }
+
+  async getFaveListings(id) {
+    return this.getLinked(id, 'faveListings', 'listings');
+  }
+
+  async getCollections(id) {
+    return this.getLinked(id, 'collections', 'collections');
+  }
 }
