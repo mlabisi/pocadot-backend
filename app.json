@@ -9,5 +9,12 @@
     {
       "url": "heroku/nodejs"
     }
-  ]
+  ],
+  "environments": {
+    "review": {
+      "env": {
+        "NPM_CONFIG_PRODUCTION": "false"
+      }
+    }
+  }
 }
