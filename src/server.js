@@ -3,7 +3,7 @@ const { BaseRedisCache } = require('apollo-server-cache-redis');
 const Redis = require('ioredis');
 const { typeDefs, resolvers } = require('./schema');
 const services = require('./services');
-const { Groups, Idols, Users, Collections } = require('./data-sources');
+const { Groups, Idols, Users, Collections, Listings } = require('./data-sources');
 
 const server = new ApolloServer({
   typeDefs,
@@ -19,7 +19,7 @@ const server = new ApolloServer({
     collections: new Collections(),
     groups: new Groups(),
     idols: new Idols(),
-    listings: {},
+    listings: new Listings(),
     users: new Users(),
   }),
 });
