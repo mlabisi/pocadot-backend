@@ -13,7 +13,7 @@
   "environments": {
     "review": {
       "env": {
-        "NPM_CONFIG_PRODUCTION": "false"
+        "NODE_ENV": "dev"
       }
     }
   }
