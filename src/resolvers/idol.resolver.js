@@ -4,7 +4,7 @@ module.exports = {
     id: ({ fields }, __, ___) => fields.id,
     stageName: ({ fields }, __, ___) => fields.stageName,
     favedBy: async (idol, __, { dataSources }) =>
-      (await dataSources.idol.getFavedBy(idol.id)) ?? [],
+      (await dataSources.idols.getFavedBy(idol.id)) ?? [],
     groups: async (idol, __, { dataSources }) =>
       (await dataSources.idols.getGroups(idol.id)) ?? [],
     inListings: async (idol, __, { dataSources }) =>
