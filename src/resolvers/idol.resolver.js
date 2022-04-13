@@ -22,7 +22,6 @@ module.exports = {
           : dataSources.idols.getIdolById(ids);
       }
 
-      // TODO: Use datasources here (if fields.groups, then call dataSources.groups.members for given group id
       if (fields) {
         return dataSources.idols.getByFields(fields);
       }

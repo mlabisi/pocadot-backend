@@ -4,7 +4,8 @@
   "description": "The backend for pocadot",
   "main": "./src/server.js",
   "scripts": {
-    "dev": "node ./src/server.js"
+    "dev": "node ./src/server.js",
+    "prettify": "prettier --write **/*.js"
   },
   "engines": {
     "node": "14.18.2",
@@ -29,16 +30,16 @@
   "dependencies": {
     "@graphql-tools/load-files": "^6.5.3",
     "@graphql-tools/merge": "^8.2.6",
-    "@prisma/client": "^3.11.1",
+    "@mlabisi/apollo-datasource-airtable": "0.1.7",
     "airtable": "^0.11.3",
     "apollo-datasource": "^3.3.1",
     "apollo-server": "^3.6.6",
     "apollo-server-cache-redis": "^3.3.1",
-    "apollo-server-caching": "^3.3.0",
     "dataloader": "^2.0.0",
     "graphql": "^16.3.0",
-    "ioredis": "^5.0.3",
-    "node-fetch": "2.6.7",
+    "ioredis": "^5.0.3"
+  },
+  "devDependencies": {
     "prettier": "^2.6.1"
   }
 }

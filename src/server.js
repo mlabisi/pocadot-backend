@@ -20,7 +20,7 @@ const server = new ApolloServer({
     groups: new Groups(),
     idols: new Idols(),
     listings: {},
-    users: new Users()
+    users: new Users(),
   }),
 });
 

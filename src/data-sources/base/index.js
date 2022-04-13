@@ -1,6 +1,4 @@
-const {
-  AirtableDataSource,
-} = require('../../../../apollo-datasource-airtable/src/index'); // require('apollo-datasource-airtable');
+const { AirtableDataSource } = require('@mlabisi/apollo-datasource-airtable');
 
 module.exports.BaseDataSource = class extends AirtableDataSource {
   constructor(table) {
@@ -26,13 +24,12 @@ module.exports.BaseDataSource = class extends AirtableDataSource {
   async getLinked(id, fieldName, linkedTable) {
     const ids = await new Promise((resolve, reject) => {
       this.table.find(id, (err, record) => {
-          if (err) {
-            return reject(err);
-          }
-          
-          return resolve(record._rawJson.fields[fieldName] ?? []);
+        if (err) {
+          return reject(err);
         }
-      );
+
+        return resolve(record._rawJson.fields[fieldName] ?? []);
+      });
     });
 
     return ids.map((linkedId) =>
