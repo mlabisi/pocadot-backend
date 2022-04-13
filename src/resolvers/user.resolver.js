@@ -39,8 +39,8 @@ module.exports = {
     },
   },
   Mutation: {
-    insert_users: (root, args, context) => {},
-    update_users: (root, args, context) => {},
-    delete_users: (root, args, context) => {},
+    addUsers: (root, args, context) => {},
+    updateUsers: (root, args, context) => {},
+    deleteUsers: (root, args, context) => {},
   },
 };

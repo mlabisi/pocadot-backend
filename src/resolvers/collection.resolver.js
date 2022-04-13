@@ -30,8 +30,8 @@ module.exports = {
     },
   },
   Mutation: {
-    insert_collections: (root, args, context) => [],
-    update_collections: (root, args, context) => [],
-    delete_collections: (root, args, context) => [],
+    addCollections: (root, args, context) => [],
+    updateCollections: (root, args, context) => [],
+    deleteCollections: (root, args, context) => [],
   },
 };

@@ -44,8 +44,8 @@ module.exports = {
     },
   },
   Mutation: {
-    insert_listings: (root, args, context) => {},
-    update_listings: (root, args, context) => {},
-    delete_listings: (root, args, context) => {},
+    addListings: (root, args, context) => {},
+    updateListings: (root, args, context) => {},
+    deleteListings: (root, args, context) => {},
   },
 };

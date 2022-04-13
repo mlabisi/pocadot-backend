@@ -21,7 +21,7 @@ type Query {
 }
 
 type Mutation {
-  insert_collections(input: [AddCollectionInput!]!): [Collection!]!
-  update_collections(input: [UpdateCollectionInput!]!): [Collection!]!
-  delete_collections(input: [UniqueCollectionInput!]!): [Collection!]!
+  insertCollections(input: [AddCollectionInput!]!): [Collection!]!
+  updateCollections(input: [UpdateCollectionInput!]!): [Collection!]!
+  deleteCollections(input: [UniqueCollectionInput!]!): [Collection!]!
 }

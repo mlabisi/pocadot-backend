@@ -32,7 +32,7 @@ type Query {
 }
 
 type Mutation {
-  insert_users(input: [AddUserInput!]!): [User!]!
-  update_users(input: [UpdateUserInput!]!): [User!]!
-  delete_users(input: [UniqueUserInput!]!): [User!]!
+  insertUsers(input: [AddUserInput!]!): [User!]!
+  updateUsers(input: [UpdateUserInput!]!): [User!]!
+  deleteUsers(input: [UniqueUserInput!]!): [User!]!
 }
