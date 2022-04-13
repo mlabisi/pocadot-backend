@@ -1,0 +1,13 @@
+{
+  "addons": [
+    "rediscloud", {
+      "plan": "30",
+      "as": "REDISCLOUD"
+    }
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ]
+}
