@@ -3,7 +3,13 @@ const { BaseRedisCache } = require('apollo-server-cache-redis');
 const Redis = require('ioredis');
 const { typeDefs, resolvers } = require('./schema');
 const services = require('./services');
-const { Groups, Idols, Users, Collections, Listings } = require('./data-sources');
+const {
+  Groups,
+  Idols,
+  Users,
+  Collections,
+  Listings,
+} = require('./data-sources');
 
 const server = new ApolloServer({
   typeDefs,
@@ -24,6 +30,6 @@ const server = new ApolloServer({
   }),
 });
 
-server.listen([{ port: process.env.PORT ?? 4000 }]).then(({ url }) => {
+server.listen({ port: process.env.PORT ?? 4000 }).then(({ url }) => {
   console.log(`🚀  Server ready at ${url}`);
 });
