@@ -1,0 +1,20 @@
+{
+  "addons": [
+    "rediscloud", {
+      "plan": "30",
+      "as": "REDISCLOUD"
+    }
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ],
+  "environments": {
+    "review": {
+      "env": {
+        "NODE_ENV": "dev"
+      }
+    }
+  }
+}

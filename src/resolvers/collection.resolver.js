@@ -1,3 +1,4 @@
+const { getPage } = require('../util');
 module.exports = {
   Collection: {
     id: ({ fields }, __, ___) => fields.id,
@@ -25,7 +26,7 @@ module.exports = {
     collectionsFeed: async (root, { page }, { dataSources }) => {
       return {
         page,
-        collections: await dataSources.collections.getAll(),
+        collections: await getPage(page, dataSources.collections),
       };
     },
   },

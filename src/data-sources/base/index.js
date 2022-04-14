@@ -1,25 +1,23 @@
-const {
-  AirtableDataSource,
-} = require('../../../../apollo-datasource-airtable/src/index');
-
+const { AirtableDataSource } = require('@mlabisi/apollo-datasource-airtable');
+const TTL = 86400; // 24 hours in seconds
 module.exports.BaseDataSource = class extends AirtableDataSource {
   constructor(table) {
     super(table);
   }
 
-  async getById(id, ttl = 1440) {
+  async getById(id, ttl = TTL) {
     return this.findOneById(id, { ttl });
   }
 
-  async getByIds(ids, ttl = 1440) {
+  async getByIds(ids, ttl = TTL) {
     return this.findManyByIds(ids, { ttl });
   }
 
-  async getAll(ttl = 1440) {
+  async getAll(ttl = TTL) {
     return this.findAll({ ttl });
   }
 
-  async getByFields(fields, ttl = 1440) {
+  async getByFields(fields, ttl = TTL) {
     return this.findByFields(fields, { ttl });
   }
 
@@ -108,8 +106,7 @@ module.exports.BaseDataSource = class extends AirtableDataSource {
       // if there are less than ten ids and we're at the last item OR
       // if we've queued 9 record objects, then we should add one more to the queue,
       // delete the batch of ids, then clear the queue
-      const shouldDeleteBatch =
-        (i === ids.length - 1) || (i + 1) % 10 === 0;
+      const shouldDeleteBatch = i === ids.length - 1 || (i + 1) % 10 === 0;
 
       if (shouldDeleteBatch) {
         toDelete.push(ids[i]);
@@ -120,7 +117,7 @@ module.exports.BaseDataSource = class extends AirtableDataSource {
             if (err) {
               reject(err);
             }
-            const ids = records.map((record) => record.id)
+            const ids = records.map((record) => record.id);
             resolve(ids);
           });
         });

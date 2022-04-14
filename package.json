@@ -1,10 +1,11 @@
 {
   "name": "pocadot-backend",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "The backend for pocadot",
   "main": "./src/server.js",
   "scripts": {
     "dev": "node --trace-warnings ./src/server.js",
+    "start": "node ./src/server.js",
     "prettify": "prettier --write **/*.js"
   },
   "engines": {

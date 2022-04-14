@@ -1,9 +1,10 @@
+const { getPage } = require('../util');
 module.exports = {
   Idol: {
     id: ({ fields }, __, ___) => fields.id,
     stageName: ({ fields }, __, ___) => fields.stageName,
     favedBy: async (idol, __, { dataSources }) =>
-      (await dataSources.idol.getFavedBy(idol.id)) ?? [],
+      (await dataSources.idols.getFavedBy(idol.id)) ?? [],
     groups: async (idol, __, { dataSources }) =>
       (await dataSources.idols.getGroups(idol.id)) ?? [],
     inListings: async (idol, __, { dataSources }) =>
@@ -28,9 +29,10 @@ module.exports = {
         return dataSources.idols.getByFields(fields);
       }
     },
-    idolsFeed: async (root, __, { dataSources }) => {
+    idolsFeed: async (root, { page }, { dataSources }) => {
       return {
-        idols: await dataSources.idols.getAll(),
+        page,
+        idols: await getPage(page, dataSources.idols),
       };
     },
   },

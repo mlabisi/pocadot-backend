@@ -1,3 +1,4 @@
+const { getPage } = require('../util');
 module.exports = {
   User: {
     id: ({ fields }, __, ___) => fields.id,
@@ -34,7 +35,7 @@ module.exports = {
     usersFeed: async (root, { page }, { dataSources }) => {
       return {
         page,
-        users: await dataSources.users.getAll(),
+        users: await getPage(page, dataSources.users),
       };
     },
   },
