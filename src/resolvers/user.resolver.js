@@ -40,14 +40,14 @@ module.exports = {
     },
   },
   Mutation: {
-    addUsers: async (_, { input }, { dataSources }) => {
-      return dataSources.users.create(input);
+    addUser: async (_, { input }, { dataSources }) => {
+      return dataSources.users.create([input]).then((created) => created[0]);
     },
-    updateUsers: async (_, { input }, { dataSources }) => {
-      return dataSources.users.update(input);
+    updateUser: async (_, { input }, { dataSources }) => {
+      return dataSources.users.update([input]).then((updated) => updated[0]);
     },
-    deleteUsers: async (_, { input }, { dataSources }) => {
-      return dataSources.users.delete(input);
+    deleteUser: async (_, { input }, { dataSources }) => {
+      return dataSources.users.delete([input]).then((deleted) => deleted[0]);
     },
   },
 };
