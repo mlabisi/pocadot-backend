@@ -37,11 +37,11 @@ module.exports = {
     },
   },
   Mutation: {
-    addListings: async (_, { input }, { dataSources }) => {
-      return dataSources.listings.create(input);
+    addListing: async (_, { input }, { dataSources }) => {
+      return dataSources.listings.create([input]).then((created) => created[0]);
     },
-    updateListings: async (_, { input }, { dataSources }) => {
-      return dataSources.listings.update(input);
+    updateListing: async (_, { input }, { dataSources }) => {
+      return dataSources.listings.update([input]).then((updated) => updated[0]);
     },
     deleteListings: async (_, { input }, { dataSources }) => {
       return dataSources.listings.delete(input);

@@ -34,7 +34,7 @@ type Query {
 }
 
 type Mutation {
-  addListings(input: [AddListingInput!]!): [Listing!]!
-  updateListings(input: [UpdateListingInput!]!): [Listing!]!
-  deleteListings(input: [ID!]!): [ID!]!
+  addListing(input: AddListingInput!): Listing!
+  updateListing(input: UpdateListingInput!): Listing!
+  deleteListings(input: [ID!]!): [Listing!]!
 }
