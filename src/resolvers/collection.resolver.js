@@ -23,11 +23,11 @@ module.exports = {
     },
   },
   Mutation: {
-    addCollections: async (_, { input }, { dataSources }) => {
-      return dataSources.collections.create(input);
+    addCollection: async (_, { input }, { dataSources }) => {
+      return dataSources.collections.create([input]).then((created) => created[0]);
     },
-    updateCollections: async (_, { input }, { dataSources }) => {
-      return dataSources.collections.update(input);
+    updateCollection: async (_, { input }, { dataSources }) => {
+      return dataSources.collections.update([input]).then((updated) => updated[0]);
     },
     deleteCollections: async (_, { input }, { dataSources }) => {
       return dataSources.collections.delete(input);
