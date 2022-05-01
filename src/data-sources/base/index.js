@@ -122,6 +122,7 @@ module.exports.BaseDataSource = class extends AirtableDataSource {
       if (shouldDeleteBatch) {
         toDelete.push(item.id);
         await this.deleteFromCacheById(item.id);
+        await this.clearAllRecordsCache();
 
         await new Promise((resolve, reject) => {
           this.table.destroy(toDelete, (err, records) => {

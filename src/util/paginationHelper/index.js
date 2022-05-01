@@ -1,5 +1,6 @@
 module.exports.getPage = async (page, dataSource, pageSize = 100) => {
   const records = await dataSource.getAll();
+  if (records.length === 0 ) return [];
   const pagesCt = Math.ceil(records.length / pageSize);
 
   if (page > pagesCt) {

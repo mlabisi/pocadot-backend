@@ -1,4 +1,4 @@
-const { getPage } = require('../util');
+const { getPage, filter } = require('../util');
 module.exports = {
   Collection: {
     id: ({ fields }, __, ___) => fields.id,
@@ -12,16 +12,8 @@ module.exports = {
       (await dataSources.collections.getTaggedGroups(collection.id)) ?? {},
   },
   Query: {
-    collections: async (root, { ids, fields }, { dataSources }) => {
-      if (ids) {
-        return ids.length === 1
-          ? dataSources.collections.getById(ids[0])
-          : dataSources.collections.getByIds(ids);
-      }
-
-      if (fields) {
-        return dataSources.collections.getByFields(fields);
-      }
+    collections: async (root, { input }, { dataSources }) => {
+      return await filter(dataSources.collections, input);
     },
     collectionsFeed: async (root, { page }, { dataSources }) => {
       return {

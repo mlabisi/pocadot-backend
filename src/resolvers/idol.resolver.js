@@ -1,4 +1,4 @@
-const { getPage } = require('../util');
+const { getPage, filter } = require('../util');
 module.exports = {
   Idol: {
     id: ({ fields }, __, ___) => fields.id,
@@ -17,17 +17,7 @@ module.exports = {
   },
   Query: {
     idols: async (root, { input }, { dataSources }) => {
-      const { ids, fields } = input;
-
-      if (ids) {
-        return ids.length === 1
-          ? dataSources.idols.getById(ids[0])
-          : dataSources.idols.getByIds(ids);
-      }
-
-      if (fields) {
-        return dataSources.idols.getByFields(fields);
-      }
+      return await filter(dataSources.idols, input);
     },
     idolsFeed: async (root, { page }, { dataSources }) => {
       return {

@@ -1,4 +1,4 @@
-const { getPage } = require('../util');
+const { getPage, filter } = require('../util');
 module.exports = {
   Listing: {
     id: ({ fields }, __, ___) => fields.id,
@@ -26,16 +26,8 @@ module.exports = {
     type: ({ fields }) => fields.type,
   },
   Query: {
-    listings: async (root, { ids, fields }, { dataSources }) => {
-      if (ids) {
-        return ids.length === 1
-          ? dataSources.listings.getById(ids[0])
-          : dataSources.listings.getByIds(ids);
-      }
-
-      if (fields) {
-        return dataSources.listings.getByFields(fields);
-      }
+    listings: async (root, { input }, { dataSources }) => {
+      return await filter(dataSources.listings, input);
     },
     listingsFeed: async (root, { page }, { dataSources }) => {
       return {

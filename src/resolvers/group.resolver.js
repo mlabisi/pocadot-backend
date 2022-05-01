@@ -1,4 +1,4 @@
-const { getPage } = require('../util');
+const { getPage, filter } = require('../util');
 module.exports = {
   Group: {
     id: (group, __, ___) => group.id,
@@ -17,17 +17,8 @@ module.exports = {
   },
   Query: {
     groups: async (root, { input }, { dataSources }) => {
-      const { ids, fields } = input;
+      return await filter(dataSources.groups, input);
 
-      if (ids) {
-        return ids.length === 1
-          ? dataSources.groups.getById(ids[0])
-          : dataSources.groups.getByIds(ids);
-      }
-
-      if (fields) {
-        return dataSources.groups.getByFields(fields);
-      }
     },
     groupsFeed: async (root, { page }, { dataSources }) => {
       return {
