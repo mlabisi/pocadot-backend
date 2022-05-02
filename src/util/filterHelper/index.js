@@ -1,22 +1,24 @@
 module.exports.filter = async (dataSource, { fields, ids }) => {
-  if (!fields && !ids) {
+  const shouldFilterById = ids && ids.length > 0;
+  const shouldFilterByFields = fields && Object.keys(fields).length > 0;
+
+  if (!(shouldFilterById || shouldFilterByFields)) {
     return await dataSource.getAll();
   }
 
   const filtered = [];
 
-  const shouldFilterById = ids && ids.length > 0;
-  const shouldFilterByFields = fields && fields.length > 0;
-
   if (shouldFilterById) {
-    filtered.push(ids.length === 1
-      ? await dataSource.getById(ids[0])
-      : await dataSource.getByIds(ids));
+    filtered.push(
+      ids.length === 1
+        ? dataSource.getById(ids[0])
+        : dataSource.getByIds(ids),
+    );
   }
 
   if (shouldFilterByFields) {
-    filtered.push(await dataSource.getByFields(fields));
+    filtered.push(dataSource.getByFields(fields));
   }
 
-  return filtered.flat();
-}
+  return (await Promise.all(filtered)).flat();
+};
