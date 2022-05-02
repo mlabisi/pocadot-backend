@@ -1,25 +1,4 @@
 """
-When adding an idol, the group must exist first
-"""
-input AddIdolInput {
-  id: ID!
-  stageName: String!
-  groups: [ID!]
-}
-
-"""
-When updating an idol, all fields can be updated
-"""
-input UpdateIdolInput {
-  id: ID!
-  stageName: String
-  groups: [ID!]
-  inListings: [ID!]
-  wantedByListings: [ID!]
-  inCollections: [ID!]
-}
-
-"""
 Available filters for the Idol type
 """
 input IdolFilters {

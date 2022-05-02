@@ -1,24 +1,4 @@
 """
-When adding a group, idols can be created and/or connnected
-"""
-input AddGroupInput {
-  name: String!
-  idols: [ID!]
-}
-
-"""
-When updating a group, all fields can be updated
-"""
-input UpdateGroupInput {
-  id: ID!
-  name: String
-  idols: [ID!]
-  favedBy: [ID!]
-  inListings: [ID!]
-  wantedByListings: [ID!]
-}
-
-"""
 Available filters for the Group type
 """
 input GroupFilters {
