@@ -1,0 +1,24 @@
+name: Deploy to Heroku
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: pocadot-backend-dev
+      url: https://pocadot-backend-dev.herokuapp.com/
+    name: Deploy
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Push to Heroku
+        run: git push -f https://heroku:$HEROKU_API_KEY@git.heroku.com/pocadot-backend-dev.git main
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+          HEROKU_APP_NAME: pocadot-backend-dev
