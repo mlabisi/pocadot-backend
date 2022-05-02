@@ -33,4 +33,5 @@ input IdolFilterFields {
   inListings: [ID!]
   wantedByListings: [ID!]
   inCollections: [ID!]
+  isSolo: Boolean
 }

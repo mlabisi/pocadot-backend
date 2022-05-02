@@ -14,6 +14,7 @@ module.exports = {
     inCollections: async (idol, __, { dataSources }) =>
       (await dataSources.idols.getInCollections(idol.id)) ?? [],
     isFeatured: ({ fields }) => fields.isFeatured ?? false,
+    isSolo: ({ fields }) => fields.isSolo ?? false,
   },
   Query: {
     idols: async (root, { input }, { dataSources }) => {

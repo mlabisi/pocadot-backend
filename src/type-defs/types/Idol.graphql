@@ -10,6 +10,7 @@ type Idol {
   wantedByListings: [Listing!]
   inCollections: [Collection!]
   isFeatured: Boolean!
+  isSolo: Boolean!
 }
 
 type IdolFeed {
