@@ -1,0 +1,5 @@
+union Talent = Idol | Group
+
+type Query {
+    preferencesFeed: [Talent]
+}

@@ -18,7 +18,6 @@ module.exports = {
   Query: {
     groups: async (root, { input }, { dataSources }) => {
       return await filter(dataSources.groups, input);
-
     },
     groupsFeed: async (root, { page }, { dataSources }) => {
       return {

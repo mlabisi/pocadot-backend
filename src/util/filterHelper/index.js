@@ -1,4 +1,4 @@
-module.exports.filter = async (dataSource, { fields, ids }) => {
+module.exports.filter = async (dataSource, { fields, ids } = {}) => {
   const shouldFilterById = ids && ids.length > 0;
   const shouldFilterByFields = fields && Object.keys(fields).length > 0;
 
