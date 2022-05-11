@@ -1,0 +1,5 @@
+input UserPreferencesInput {
+    id: ID!
+    faveGroups: [ID!]
+    faveIdols: [ID!]
+}

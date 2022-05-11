@@ -1,7 +1,7 @@
 """
 Represents a group in the system
 """
-type Group {
+type Group implements Talent {
   id: ID!
   name: String!
   favedBy: [User!]

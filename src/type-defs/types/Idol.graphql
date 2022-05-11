@@ -1,7 +1,7 @@
 """
 Represents an idol in the system
 """
-type Idol {
+type Idol implements Talent {
   id: ID!
   stageName: String!
   favedBy: [User!]
