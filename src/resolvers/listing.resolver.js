@@ -23,18 +23,29 @@ module.exports = {
     targetGroups: async (listing, __, { dataSources }) =>
       (await dataSources.listings.getTargetGroups(listing.id)) ?? [],
     targetMinStaringPrice: ({ fields }) => fields.targetMinStaringPrice,
-    type: ({ fields }) => fields.type,
+    type: ({ fields }) => Array.isArray(fields.type) ? fields.type : [fields.type],
   },
   Query: {
     listings: async (root, { input }, { dataSources }) => {
       return await filter(dataSources.listings, input);
     },
-    listingsFeed: async (root, { page }, { dataSources }) => {
-      return {
-        page,
-        listings: await getPage(page, dataSources.listings),
-      };
+    listingsFeed: async (root, __, { dataSources }) => {
+      return filter(dataSources.listings);
     },
+    userSuggestions: async (root, { input }, { dataSources }) => {
+      const faveGroups = await Promise.all(await dataSources.users.getFaveGroups(input))
+      const faveIdols = await Promise.all(await dataSources.users.getFaveIdols(input))
+
+      const fields = {};
+      if(faveGroups.length > 0) {
+        fields.groups = faveGroups.map(group => group.id)
+      }
+      if(faveIdols.length > 0) {
+        fields.idols = faveIdols.map(idol => idol.id)
+      }
+
+      return await filter(dataSources.listings, { fields })
+    }
   },
   Mutation: {
     addListing: async (_, { input }, { dataSources }) => {

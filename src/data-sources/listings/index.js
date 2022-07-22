@@ -7,7 +7,7 @@ module.exports.Listings = class extends BaseDataSource {
   }
 
   async getListedBy(id) {
-    return this.getLinked(id, 'listedBy', 'users');
+    return (await this.getLinked(id, 'listedBy', 'users'))[0];
   }
 
   async getFavedBy(id) {

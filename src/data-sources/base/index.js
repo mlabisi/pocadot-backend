@@ -152,8 +152,8 @@ module.exports.BaseDataSource = class extends AirtableDataSource {
       });
     });
 
-    return ids.map((linkedId) =>
+    return Promise.all(ids.map((linkedId) =>
       this.context.dataSources[linkedTable].getById(linkedId),
-    );
+    ));
   }
 };

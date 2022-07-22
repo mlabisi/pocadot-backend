@@ -3,10 +3,10 @@ interface Talent {
 }
 
 type Query {
-    preferencesFeed: [Talent]
-    userPreferences(input: UserFilters!): [Talent]
+    preferencesFeed: [Talent!]!
+    userPreferences(input: UserFilters!): [Talent!]!
 }
 
 type Mutation {
-    userPreferences(input: UserPreferencesInput): [Talent]
+    userPreferences(input: UserPreferencesInput): [Talent!]!
 }

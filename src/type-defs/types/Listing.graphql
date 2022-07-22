@@ -30,7 +30,8 @@ type ListingFeed {
 
 type Query {
   listings(input: ListingFilters!): [Listing!]!
-  listingsFeed(page: Int!): ListingFeed!
+  listingsFeed: [Listing!]!
+  userSuggestions(input: ID!): [Listing!]!
 }
 
 type Mutation {

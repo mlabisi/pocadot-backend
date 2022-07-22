@@ -7,7 +7,4 @@ enum ListingType {
 
   # Want to trade
   WTT
-
-  # Want to either sell or trade
-  WTS_WTT
 }

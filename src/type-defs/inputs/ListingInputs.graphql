@@ -52,7 +52,7 @@ input ListingFieldFilters {
   release: [String!]
   description: [String!]
   condition: CardCondition
-  startingPrice: Float!
+  startingPrice: Float
   country: [String!]
   international: Boolean
   listedBy: [ID!]
