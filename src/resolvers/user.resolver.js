@@ -19,6 +19,7 @@ module.exports = {
     collections: async (user, __, { dataSources }) =>
       (await dataSources.users.getCollections(user.id)) ?? [],
     isFeatured: ({ fields }) => fields.isFeatured ?? false,
+    chats: async (user, __, context) => (await context.dataSources.chats.fetchUserConversations({ userId: user.id }))
   },
   Query: {
     users: async (root, { input }, { dataSources }) => {

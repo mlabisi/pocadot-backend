@@ -19,6 +19,7 @@ type User {
   faveUsers: [User!]
   profilePicture: [JSON!]
   collections: [Collection!]
+  chats: [Chat!]
 }
 
 type UserFeed {

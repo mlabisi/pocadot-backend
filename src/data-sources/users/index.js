@@ -6,6 +6,12 @@ module.exports.Users = class extends BaseDataSource {
     super(services.Airtable.base('users'));
   }
 
+  async create(items) {
+    const user = super.create(items)[0];
+
+    return services.Twilio.client.conversations.v1.users.create({identity: user.id}).then(() => user)
+  }
+
   async getListings(id) {
     return this.getLinked(id, 'listings', 'listings');
   }

@@ -4,6 +4,7 @@ const Redis = require('ioredis');
 const { typeDefs, resolvers } = require('./schema');
 const services = require('./services');
 const {
+  Chats,
   Groups,
   Idols,
   Users,
@@ -22,6 +23,7 @@ const server = new ApolloServer({
     services,
   },
   dataSources: () => ({
+    chats: new Chats(),
     collections: new Collections(),
     groups: new Groups(),
     idols: new Idols(),

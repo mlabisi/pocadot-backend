@@ -1,0 +1,24 @@
+type Message {
+    id: ID!
+    author: User!
+    body: String!
+    date: String!
+}
+
+type Chat {
+    id: ID!
+    date: String!
+    participants: [User!]
+    listings: [Listing!]
+    messages: [Message!]
+}
+
+type Query {
+    fetchChat(input: UniqueChatInput!): Chat
+}
+
+type Mutation {
+    startChat(input: StartChatInput!): Chat!
+    sendMessage(input: SendMessageInput!): Chat!
+    deleteChat(input: UniqueChatInput!): Chat!
+}
