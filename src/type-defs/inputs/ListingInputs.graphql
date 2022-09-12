@@ -44,7 +44,7 @@ input UpdateListingInput {
 Available filters for the Listing type
 """
 input ListingFilters {
-  id: [ID!]
+  ids: [ID!]
   fields: ListingFieldFilters
 }
 

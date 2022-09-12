@@ -8,7 +8,7 @@ module.exports = {
     startingPrice: ({ fields }) => fields.startingPrice,
     country: ({ fields }) => fields.country,
     isFeatured: ({ fields }) => fields.isFeatured ?? false,
-    international: ({ fields }) => fields.international,
+    international: ({ fields }) => fields.international ?? false,
     listedBy: async (listing, __, { dataSources }) =>
       (await dataSources.listings.getListedBy(listing.id)) ?? {},
     favedBy: async (listing, __, { dataSources }) =>
@@ -33,18 +33,19 @@ module.exports = {
       return filter(dataSources.listings);
     },
     userSuggestions: async (root, { input }, { dataSources }) => {
-      const faveGroups = await Promise.all(await dataSources.users.getFaveGroups(input))
-      const faveIdols = await Promise.all(await dataSources.users.getFaveIdols(input))
-
-      const fields = {};
-      if(faveGroups.length > 0) {
-        fields.groups = faveGroups.map(group => group.id)
-      }
-      if(faveIdols.length > 0) {
-        fields.idols = faveIdols.map(idol => idol.id)
-      }
-
-      return await filter(dataSources.listings, { fields })
+      return filter(dataSources.listings);
+      // const faveGroups = await Promise.all(await dataSources.users.getFaveGroups(input))
+      // const faveIdols = await Promise.all(await dataSources.users.getFaveIdols(input))
+      //
+      // const fields = {};
+      // if(faveGroups.length > 0) {
+      //   fields.groups = faveGroups.map(group => group.id)
+      // }
+      // if(faveIdols.length > 0) {
+      //   fields.idols = faveIdols.map(idol => idol.id)
+      // }
+      //
+      // return await filter(dataSources.listings, { fields })
     }
   },
   Mutation: {
