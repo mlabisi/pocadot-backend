@@ -13,7 +13,7 @@ module.exports = {
   },
   Chat: {
     id: (conversation) => conversation.sid,
-    timestamp: (conversation) => conversation.dateCreated.toString(),
+    timestamp: (conversation) => conversation.dateCreated,
     participants: async (conversation, __, context) => {
       return (
         await context.dataSources.chats.fetchParticipants(conversation.sid)
@@ -34,6 +34,6 @@ module.exports = {
     id: (message) => message.sid,
     author: (message, __, context) =>
       context.dataSources.users.getById(message.author),
-    timestamp: (message) => message.date_created,
+    timestamp: (message) => message.dateCreated,
   },
 };

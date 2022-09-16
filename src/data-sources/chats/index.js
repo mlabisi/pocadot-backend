@@ -23,11 +23,15 @@ module.exports.Chats = class extends DataSource {
         resolve(this.fetchUserConversations({ userId: fromId })),
       ),
     );
-    const existingConversation = await new Promise(resolve => resolve(existingConversations.find(
-      async (c) => {
-        return (await (Promise.all(await this.fetchParticipants(c.sid)))).map(p => p.identity).includes(toId)
-      },
-    )));
+    const existingConversation = await new Promise((resolve) =>
+      resolve(
+        existingConversations.find(async (c) => {
+          return (await Promise.all(await this.fetchParticipants(c.sid)))
+            .map((p) => p.identity)
+            .includes(toId);
+        }),
+      ),
+    );
 
     if (existingConversation) {
       const existingIds = JSON.parse(
@@ -101,6 +105,9 @@ module.exports.Chats = class extends DataSource {
   async fetchMessages(conversationId) {
     return services.Twilio.client.conversations.v1
       .conversations(conversationId)
-      .messages.list({ limit: 15 });
+      .messages.list({ limit: 15 })
+      .then((list) =>
+        list.sort((a, b) => new Date(b.dateCreated) - new Date(a.dateCreated)),
+      );
   }
 };
