@@ -2,12 +2,12 @@ type Message {
     id: ID!
     author: User!
     body: String!
-    date: String!
+    timestamp: String!
 }
 
 type Chat {
     id: ID!
-    date: String!
+    timestamp: String!
     participants: [User!]
     listings: [Listing!]
     messages: [Message!]
