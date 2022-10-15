@@ -12,6 +12,30 @@ const {
   Listings,
 } = require('./data-sources');
 
+const loggingPlugin = {
+  // Fires whenever a GraphQL request is received from a client.
+  async requestDidStart(requestContext) {
+    console.log(
+      `${new Date()} - Request started! Query:\n` +
+        requestContext.request.query,
+    );
+
+    return {
+      // Fires whenever Apollo Server will parse a GraphQL
+      // request to create its associated document AST.
+      async parsingDidStart(requestContext) {
+        console.log(`${new Date()} - Parsing started!`);
+      },
+
+      // Fires whenever Apollo Server will validate a
+      // request's document AST against your GraphQL schema.
+      async validationDidStart(requestContext) {
+        console.log(`${new Date()} - Validation started!`);
+      },
+    };
+  },
+};
+
 const server = new ApolloServer({
   typeDefs,
   resolvers,
@@ -30,7 +54,12 @@ const server = new ApolloServer({
     listings: new Listings(),
     users: new Users(),
   }),
-  introspection: true
+  formatError: (err) => {
+    console.log(err);
+    return err;
+  },
+  introspection: true,
+  plugins: [loggingPlugin],
 });
 
 server
