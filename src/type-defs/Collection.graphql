@@ -5,9 +5,8 @@ type Collection {
   id: ID!
   title: String!
   description: String
-  user: User!
-  taggedGroups: [Group!]
-  taggedIdols: [Idol!]
+  user: UserAccount!
+  photocards: [Photocard!]!
 }
 
 type CollectionFeed {

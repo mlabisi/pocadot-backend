@@ -1,0 +1,261 @@
+"When adding a listing, all required fields must be specified"
+input AddListingInput {
+  condition: CardCondition!
+  country: String!
+  description: String
+  groups: [ID!]
+  idols: [ID!]!
+  international: Boolean!
+  listedBy: ID!
+  release: String
+  startingPrice: Float
+  targetGroups: [ID!]
+  targetIdols: [ID!]
+  targetMinCondition: CardCondition
+  targetMinStaringPrice: Float
+  type: [ListingType!]!
+}
+
+"Represents a monetary amount in the smallest unit (aka cents for USD)"
+type Amount {
+  amount: Int!
+  currency: String!
+}
+
+"Used to classify photocard conditions"
+enum CardCondition {
+  DAMAGED
+  GOOD
+  GREAT
+  NEW
+  OKAY
+}
+
+"Represents a listing in the system"
+type Listing {
+  """
+  The asking price for this listing
+
+  Resolver Source(s)
+  /v1/integration_api/listings/ - data.attributes.price (object, money)
+  """
+  askingPrice: Int!
+
+  """
+  The condition of the photocard in this listing
+
+  Resolver Source(s)
+  /v1/integration_api/listings/ - data.attributes.publicData.condition (string, enum)
+  """
+  condition: CardCondition!
+
+  """
+  The asking price for this listing
+
+  Resolver Source(s)
+  /v1/integration_api/listings/ - data.attributes.publicData.country (string)
+  """
+  country: String!
+
+  description: String!
+
+  """
+  The users who faved this listing
+
+  Resolver Source(s)
+  Algolia - query all users who have this listing in their faved listings list
+  """
+  favedBy: [UserAccount!]!
+
+  groups: [Group!]!
+
+  """
+  The listing's unique id
+
+  Resolver Source(s)
+  /v1/integration_api/listings/ - data.id (string, UUID)
+  """
+  id: ID!
+
+  idols: [Idol!]!
+
+  """
+  Whether or not this listing can be shipped internationally
+
+  Resolver Source(s)
+  /v1/integration_api/listings/ - data.attributes.metadata.international (boolean)
+  """
+  international: Boolean!
+
+  """
+  Whether or not this listing is featured
+
+  Resolver Source(s)
+  /v1/integration_api/listings/ - data.attributes.metadata.isFeatured (boolean)
+  """
+  isFeatured: Boolean!
+
+  """
+  The user who posted this listing
+
+  Resolver Source(s)
+  /v1/integration_api/listings/ - data.attributes.author.id (string, UUID)
+  """
+  listedBy: UserAccount!
+  offers: [Offer!]!
+
+  """
+  The photocard this listing is for
+
+  Resolver Source(s)
+  /v1/integration_api/listings/ - data.attributes.publicData.photocardId (string, UUID)
+  """
+  photocard: Photocard!
+
+  release: String!
+  savedBy: [UserAccount!]!
+
+  """
+  The photocards the lister would like in return if this is a trade
+
+  Resolver Source(s)
+  /v1/integration_api/listings/ - data.attributes.publicData.targetPhotocards (array, string, UUID)
+  """
+  targetPhotocards: [Photocard!]!
+
+  """
+  The groups/idols whose photocards the lister would like in return if this is a trade
+
+  Resolver Source(s)
+  /v1/integration_api/listings/ - data.attributes.publicData.targetTalent (array, string, UUID)
+  """
+  targetTalent: [Talent!]!
+
+  """
+  Whether this listing is for sale or for trade, or both
+
+  Resolver Source(s)
+  /v1/integration_api/listings/ - data.attributes.publicData.listingType (array, string, enum)
+  """
+  type: [ListingType!]!
+}
+
+type ListingFeed {
+  listings: [Listing!]!
+  page: Int!
+}
+
+input ListingFieldFilters {
+  condition: CardCondition
+  country: [String!]
+  description: [String!]
+  favedBy: [ID!]
+  groups: [ID!]
+  idols: [ID!]
+  international: Boolean
+  listedBy: [ID!]
+  release: [String!]
+  startingPrice: Float
+  targetGroups: [ID!]
+  targetIdols: [ID!]
+  targetMinCondition: CardCondition
+  type: ListingType
+}
+
+"Available filters for the Listing type"
+input ListingFilters {
+  fields: ListingFieldFilters
+  ids: [ID!]
+}
+
+"Used to classify listings"
+enum ListingType {
+  WTS
+  WTT
+}
+
+"""
+Represents a photocard in the system
+"""
+type Photocard {
+  """
+  The photocard's id from the db
+  """
+  id: ID!
+
+  """
+  The idols featured in this photocard
+  """
+  idols: [Idol!]!
+
+  """
+  The group this era is associated with
+  """
+  group: Group
+
+  """
+  The era this photocard is associated with
+  """
+  era: String!
+
+  """
+  The description for this photocard. Usually the release it
+  was associated with, like the album or the broadcast
+  """
+  description: String!
+}
+
+"A listing recommendation"
+type Suggestion {
+  listing: Listing!
+  saved: Boolean!
+  skipped: Boolean!
+}
+
+"""
+A swipe action operated on a suggested listing by a user
+"""
+type Swipe {
+  id: ID!
+  listing: Listing!
+  faved: Boolean!
+  viewed: Boolean!
+  skipped: Boolean!
+}
+
+"When updating a listing, only non-final fields can be updated"
+input UpdateListingInput {
+  condition: CardCondition
+  country: String
+  description: String
+  favedBy: [ID!]
+  groups: [ID!]
+  id: ID!
+  idols: [ID!]
+  international: Boolean
+  listedBy: ID
+  release: String
+  startingPrice: Float
+  targetGroups: [ID!]
+  targetIdols: [ID!]
+  targetMinCondition: CardCondition
+  targetMinStaringPrice: Float
+  type: [ListingType!]
+}
+
+type Query {
+  featuredListings: [Listing!]!
+  listings(input: ListingFilters!): [Listing!]!
+  listingsFeed: [Listing!]!
+  userSuggestions(input: ID!): [Listing!]!
+}
+
+type Mutation {
+  addListing(input: AddListingInput!): Listing!
+  updateListing(input: UpdateListingInput!): Listing!
+  deleteListings(input: [ID!]!): [Listing!]!
+  faveListing(input: ID!): Listing!
+  faveSuggestedListing(input: ID!): Swipe!
+  skipSuggestedListing(input: ID!): Swipe!
+  unfaveListing(input: ID!): Listing!
+}

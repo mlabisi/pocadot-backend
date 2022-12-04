@@ -10,7 +10,7 @@
   },
   "engines": {
     "node": "14.18.2",
-    "nvm": "8.6.0"
+    "npm": "8.6.0"
   },
   "prettier": {
     "semi": true,
@@ -39,6 +39,7 @@
     "dataloader": "^2.0.0",
     "graphql": "^16.3.0",
     "ioredis": "^5.0.3",
+    "sharetribe-flex-integration-sdk": "1.8.0",
     "twilio": "3.82.0"
   },
   "devDependencies": {

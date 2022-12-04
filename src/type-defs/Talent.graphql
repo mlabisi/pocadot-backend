@@ -1,0 +1,81 @@
+"A group in the database"
+type Group implements Talent {
+    id: ID!
+    idols: [Idol!]!
+    name: String!
+}
+
+type GroupFeed {
+    groups: [Group!]!
+    page: Int!
+}
+
+input GroupFilterFields {
+    favedBy: [ID!]
+    idols: [ID!]
+    inListings: [ID!]
+    name: [String!]
+    wantedByListings: [ID!]
+}
+
+"Available filters for the Group type"
+input GroupFilters {
+    fields: GroupFilterFields
+    ids: [ID!]
+}
+
+"An idol in the database"
+type Idol implements Talent {
+    groups: [Group!]!
+    id: ID!
+    isSolo: Boolean!
+    name: String!
+}
+
+type IdolFeed {
+    idols: [Idol!]!
+    page: Int!
+}
+
+input IdolFilterFields {
+    groups: [ID!]
+    inCollections: [ID!]
+    inListings: [ID!]
+    isSolo: Boolean
+    stageName: [String!]
+    wantedByListings: [ID!]
+}
+
+"Available filters for the Idol type"
+input IdolFilters {
+    fields: IdolFilterFields
+    ids: [ID!]
+}
+
+"A musical talent in the database"
+interface Talent {
+    id: ID!
+    name: String!
+}
+
+"Available filters for the Group type"
+input TalentFilters {
+    groupFields: GroupFilterFields
+    idolFields: IdolFilterFields
+    ids: [ID!]
+}
+
+type Query {
+    groups(input: GroupFilters!): [Group!]!
+    groupsFeed(page: Int!): GroupFeed!
+    idols(input: IdolFilters!): [Idol!]!
+    idolsFeed(page: Int!): IdolFeed!
+    preferencesFeed: [Talent!]!
+    talent(input: TalentFilters!): [Talent!]!
+    talentFeed: [Talent!]!
+    userPreferences(input: UserFilters!): [Talent!]!
+}
+
+type Mutation {
+    userPreferences(input: UserPreferencesInput): [Talent!]!
+}

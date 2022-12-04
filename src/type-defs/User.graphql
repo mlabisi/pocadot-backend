@@ -1,0 +1,222 @@
+"When adding a user, no optional fields can be added"
+input AddUserInput {
+  country: String!
+  username: String!
+}
+
+"An external social media user profile"
+type IdentityProvider {
+  type: IdentityProviderType!
+  userId: ID!
+}
+
+"The supported external oauth identity provider types"
+enum IdentityProviderType {
+  APPLE
+  GOOGLE
+  INSTAGRAM
+  TWITTER
+}
+
+"A registered payment method for the user account"
+interface PaymentMethod {
+  isDefault: Boolean!
+  type: PaymentMethodType!
+}
+
+"The supported payment method types"
+enum PaymentMethodType {
+  PAYPAL
+  STRIPE_CARD
+}
+
+type ProfileFeed {
+  page: Int!
+  users: [UserProfile!]!
+}
+
+"An external social media user profile"
+type SocialProfile {
+  type: SocialProfileType!
+  username: String!
+}
+
+"The supported external social media profile types"
+enum SocialProfileType {
+  CARRD
+  INSTAGRAM
+  TWITTER
+}
+
+"""
+A credit/debit card registered through Stripe
+
+Upstream API(s):
+sharetribeCU - /v1/api/current_user/show
+"""
+type StripePaymentMethod implements PaymentMethod {
+  cardBrand: String!
+  expirationMonth: String!
+  expirationYear: String!
+  isDefault: Boolean!
+  lastFour: String!
+  type: PaymentMethodType!
+}
+
+"""
+
+A user account in the system
+
+Upstream URL(s):
+sharetribeCU - GET /v1/api/current_user/show
+sharetribeOL - GET /v1/api/own_listings/query
+sharetribeTR - GET /v1/api/transactions/query?only=sale
+"""
+type UserAccount {
+  banned: Boolean!
+
+  """
+  The groups and idols marked as faves by this user
+
+  Resolver Source(s)
+  /v1/integration_api/users/ - data.attributes.profile.protectedData.country (string)
+  """
+  biases: [Talent!]!
+
+  biasSuggestionsOnly: Boolean!
+  connectedAccounts: [IdentityProvider!]!
+  country: String!
+  createdAt: String!
+  createdListings: [Listing!]!
+  deleted: Boolean!
+  email: String!
+  emailVerified: Boolean!
+  firstName: String!
+  generalNotifs: Boolean!
+
+  """
+  The user's unique id
+
+  Resolver Source(s)
+  /v1/integration_api/users/ - data.id (string, UUID)
+  """
+  id: ID!
+
+  language: String!
+  lastName: String!
+
+  """
+  This user's listings
+
+  Resolver Source(s)
+  /v1/integration_api/listings/query?authorId={id}
+  """
+  listings: [Listing!]!
+
+  paymentMethods: [PaymentMethod!]!
+  pendingEmail: String
+  profile: UserProfile!
+  savedListingNotifs: Boolean!
+  savedListings: [Listing!]!
+  savedProfileListingNotifs: Boolean!
+  savedProfiles: [UserProfile!]!
+  sentOffers: [Offer!]!
+  suggestedListings: [Listing!]!
+  swipes: [Swipe!]!
+}
+
+"Available filters for the User type"
+input UserFilters {
+  fields: UserFilterFields
+  ids: [ID!]
+}
+
+input UserFilterFields {
+  collections: [ID!]
+  country: String
+  description: String
+  faveGroups: [ID!]
+  faveIdols: [ID!]
+  faveListings: [ID!]
+  faveUsers: [ID!]
+  listings: [ID!]
+  username: String
+}
+
+"""
+A user profile in the system
+
+Upstream URL(s):
+sharetribe - /v1/api/users/show?id={uuid}
+"""
+type UserProfile {
+  """
+  The user's description as featured on their profile
+
+  Resolver Source(s)
+  /v1/integration_api/users/ - data.attributes.profile.bio (string)
+  """
+  description: String!
+
+  profilePicId: ID!
+  socials: [SocialProfile!]!
+
+  """
+  The country this user is based out of
+
+  Resolver Source(s)
+  /v1/integration_api/users/ - data.attributes.profile.protectedData.country (string)
+  """
+  country: String!
+
+  """
+  The user's username
+
+  Resolver Source(s)
+  /v1/integration_api/users/ - data.attributes.profile.displayName (string)
+  """
+  username: String!
+}
+
+"When updating a user, other existing fields can be added"
+input UpdateUserInput {
+  collections: [ID!]
+  country: String
+  faveGroups: [ID!]
+  faveIdols: [ID!]
+  faveListings: [ID!]
+  faveUsers: [ID!]
+  id: ID!
+  listings: [ID!]
+  username: String
+}
+
+
+input UserPreferencesInput {
+  faveGroups: [ID!]
+  faveIdols: [ID!]
+  id: ID!
+}
+
+type Query {
+  account(input: ID!): UserAccount!
+  profile(input: ID!): UserProfile!
+  users(input: UserFilters!): [UserProfile!]!
+  usersFeed(page: Int!): ProfileFeed!
+  currentUser: UserAccount!
+}
+
+type Mutation {
+  blockProfile(input: ID!): UserProfile!
+  changePassword: UserAccount!
+  createAccount: UserAccount!
+  deleteAccount(input: ID!): UserAccount!
+  faveProfile(input: ID!): UserProfile!
+  forgetPassword: UserAccount!
+  login: UserAccount!
+  logout: UserAccount!
+  reportProfile(input: ID!): UserProfile!
+  resetPassword: UserAccount!
+  unfaveProfile(input: ID!): UserProfile!
+  updateAccount: UserAccount!
+}

@@ -1,0 +1,52 @@
+"A message sent from one user to another"
+type Message {
+    author: UserAccount!
+    body: String!
+    recipient: UserAccount!
+    timestamp: Int!
+}
+
+"Represents an offer made on a listing in the system"
+type Offer {
+    conversation: [Message!]!
+    id: ID!
+    listing: Listing!
+    madeBy: UserAccount!
+    status: OfferStatus!
+    transaction: Transaction
+}
+
+"The supported statuses an offer can be in"
+enum OfferStatus {
+    ACCEPTED
+    EDITED
+    NEGOTIATED
+    OPEN
+    REJECTED
+    RESCINDED
+}
+
+input SendMessageInput {
+    authorId: ID!
+    conversationId: ID!
+    message: String!
+}
+
+"Represents an monetary transaction made for an accepted offer"
+type Transaction {
+    amountCharged: Amount!
+    amountEarned: Amount!
+    id: ID!
+}
+
+type Mutation {
+    acceptOffer(input: ID!): Offer!
+    disputeCharge: Transaction!
+    makeOffer: Offer!
+    makePayment: Transaction!
+    negotiateOffer: Offer!
+    rejectOffer(input: ID!): Offer!
+    rescindOffer(input: ID!): Offer!
+    sendMessage(input: SendMessageInput!): Message!
+    updateOffer: Offer!
+}
